@@ -1,0 +1,10 @@
+{
+  "description": "Test simple output",
+  "inputs": [],
+  "output": {
+    "tool": "jonatr",
+    "version": 0.1,
+    "stable": false,
+    "features": ["read", "write"]
+  }
+}

@@ -1,7 +1,6 @@
 use serde::Deserialize;
 use serde_json::Error;
-use std::fs::File;
-use std::io::BufReader;
+use std::env;
 
 #[derive(Debug, Deserialize)]
 struct Spec {
@@ -50,22 +49,14 @@ r#"{
     assert_eq!(transform(input).unwrap(), expected.to_string())
 }
 
-
-
-fn main() {
-    let the_file =
-r#"{
-  "description": "Test simple output",
-  "inputs": [],
-   "output": {
-     "tool": "jonatr",
-     "version": 0.1,
-     "stable": false,
-     "features": ["read", "write"]
-  }
-}"#;
-
-    let spec: Spec = serde_json::from_str(the_file).expect("JSON was not well-formatted");
-    println!("{:?}", spec)
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 2 {
+        eprintln!("Error: expecting JSON transformation spec");
+        std::process::exit(1);
+    }
+    let input = std::fs::read_to_string(&args[1])?;
+    let res = transform(&input)?;
+    println!("{}", res);
+    Ok(())
 }
-
