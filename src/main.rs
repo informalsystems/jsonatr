@@ -3,7 +3,9 @@ use serde::Deserialize;
 use serde_json::Error;
 use serde_json::Value;
 use std::env;
-use crate::InputKind::FILE;
+use std::process::Command;
+
+use crate::InputKind::*;
 
 #[derive(Debug, Deserialize)]
 struct Jsonatr {
@@ -12,7 +14,11 @@ struct Jsonatr {
     output: Value,
 
     #[serde(skip)]
-    files: std::collections::HashMap<String, Value>
+    files: std::collections::HashMap<String, Value>,
+
+    #[serde(skip)]
+    commands: std::collections::HashMap<String, Value>
+
 }
 
 #[derive(Debug, Deserialize, PartialEq)]
@@ -25,21 +31,25 @@ enum InputKind {
 pub struct Input {
     name: String,
     kind: InputKind,
-    source: String
+    source: String,
+
+    #[serde(default)]
+    args: Vec<String>
 }
 
 impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
         for input in &spec.inputs {
-            match input.kind {
+            match &input.kind {
                 FILE => {
                     let file = std::fs::read_to_string(&input.source)?;
                     let value: Value = serde_json::from_str(&file)?;
                     spec.files.insert(input.name.clone(), value);
                 }
-                _ => {
-                    // TODO
+                COMMAND => {
+                    let output = Command::new(&input.source).output()?;
+                    spec.commands.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).to_string()));
                 }
             }
         }
@@ -59,6 +69,10 @@ impl Jsonatr {
                     if self.files.contains_key(key) {
                         return self.files.get(key).unwrap().clone()
                     }
+                    else if self.commands.contains_key(key) {
+                        return self.commands.get(key).unwrap().clone()
+                    }
+
                 }
                 Value::String(string.to_string())
             }
@@ -79,7 +93,7 @@ impl Jsonatr {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-     let args: Vec<String> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         eprintln!("Error: expecting JSON transformation spec");
         std::process::exit(1);
