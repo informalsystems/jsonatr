@@ -1,5 +1,5 @@
 [package]
-name = "jonatr"
+name = "jsonatr"
 version = "0.1.0"
 authors = ["Andrey Kuprianov <andrey@informal.systems>"]
 edition = "2018"
@@ -8,4 +8,4 @@ edition = "2018"
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
-serde_json = { version = "1" }
+serde_json = { version = "1", features = ["preserve_order"] }

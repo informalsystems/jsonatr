@@ -2,15 +2,19 @@ use serde::Deserialize;
 use serde_json::Error;
 use serde_json::Value;
 use std::env;
+use crate::InputKind::FILE;
 
 #[derive(Debug, Deserialize)]
-struct Spec {
+struct Jsonatr {
     description: String,
     inputs: Vec<Input>,
-    output: serde_json::Value
+    output: Value,
+
+    #[serde(skip)]
+    files: std::collections::HashMap<String, Value>
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq)]
 enum InputKind {
     FILE,
     COMMAND
@@ -23,9 +27,16 @@ struct Input {
     source: String
 }
 
-impl Spec {
-    fn new(spec: &str) -> Result<Spec, Error> {
-        let spec: Spec = serde_json::from_str(spec)?;
+impl Jsonatr {
+    fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
+        let mut spec: Jsonatr = serde_json::from_str(spec)?;
+        for input in &spec.inputs {
+            if input.kind == FILE {
+                let file = std::fs::read_to_string(&input.source)?;
+                let value: Value = serde_json::from_str(&file)?;
+                spec.files.insert(input.name.clone(), value);
+            }
+        }
         Ok(spec)
     }
 
@@ -35,11 +46,13 @@ impl Spec {
     }
 
     fn transform_value(&self, v: &Value) -> Value {
-        println!("transform_value: {}", v);
         match v {
             Value::String(string) => {
                 if string.starts_with("$") {
-                    println!("found reference: {}", &string[1..])
+                    let key = &string[1..];
+                    if self.files.contains_key(key) {
+                        return self.files.get(key).unwrap().clone()
+                    }
                 }
                 Value::String(string.to_string())
             }
@@ -74,15 +87,15 @@ r#"{
 }"#;
     let expected =
 r#"{
+  "tool": "jonatr",
+  "version": 0.1,
+  "stable": false,
   "features": [
     "read",
     "write"
-  ],
-  "stable": false,
-  "tool": "jonatr",
-  "version": 0.1
+  ]
 }"#;
-    assert_eq!(transform(input).unwrap(), expected.to_string())
+    assert_eq!(Jsonatr::new(input).unwrap().transform().unwrap(), expected.to_string())
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -92,7 +105,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1);
     }
     let input = std::fs::read_to_string(&args[1])?;
-    let spec = Spec::new(&input)?;
+    let spec = Jsonatr::new(&input)?;
     let res = spec.transform()?;
     println!("{}", res);
     Ok(())

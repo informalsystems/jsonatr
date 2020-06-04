@@ -1,8 +1,8 @@
 {
-  "description": "Test simple output",
+  "description": "Simple output",
   "inputs": [],
   "output": {
-    "tool": "$jonatr",
+    "tool": "jsonatr",
     "version": 0.1,
     "stable": false,
     "features": ["read", "write"]
