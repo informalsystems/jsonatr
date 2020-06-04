@@ -1,5 +1,6 @@
 use serde::Deserialize;
 use serde_json::Error;
+use serde_json::Value;
 use std::env;
 
 #[derive(Debug, Deserialize)]
@@ -10,16 +11,51 @@ struct Spec {
 }
 
 #[derive(Debug, Deserialize)]
+enum InputKind {
+    FILE,
+    COMMAND
+}
+
+#[derive(Debug, Deserialize)]
 struct Input {
     name: String,
+    kind: InputKind,
     source: String
 }
 
-fn transform(input: &str) -> Result<String, Error> {
-    let spec: Result<Spec, Error> = serde_json::from_str(input);
-    match spec {
-        Ok(spec) => serde_json::to_string_pretty(&spec.output),
-        Err(e) => Err(e)
+impl Spec {
+    fn new(spec: &str) -> Result<Spec, Error> {
+        let spec: Spec = serde_json::from_str(spec)?;
+        Ok(spec)
+    }
+
+    fn transform(&self) -> Result<String, Error> {
+        let transformed_output = self.transform_value(&self.output);
+        serde_json::to_string_pretty(&transformed_output)
+    }
+
+    fn transform_value(&self, v: &Value) -> Value {
+        println!("transform_value: {}", v);
+        match v {
+            Value::String(string) => {
+                if string.starts_with("$") {
+                    println!("found reference: {}", &string[1..])
+                }
+                Value::String(string.to_string())
+            }
+            Value::Array(values) => {
+                let new_values = values.iter().map(|x| self.transform_value(x)).collect();
+                Value::Array(new_values)
+            },
+            Value::Object(values) => {
+                let mut new_values: serde_json::map::Map<String, Value> = serde_json::map::Map::new();
+                for (k,v) in values.iter() {
+                    new_values.insert(k.to_string(),self.transform_value(v));
+                }
+                Value::Object(new_values)
+            },
+            _ => v.clone()
+        }
     }
 }
 
@@ -56,7 +92,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1);
     }
     let input = std::fs::read_to_string(&args[1])?;
-    let res = transform(&input)?;
+    let spec = Spec::new(&input)?;
+    let res = spec.transform()?;
     println!("{}", res);
     Ok(())
 }
