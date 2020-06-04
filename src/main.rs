@@ -1,3 +1,4 @@
+
 use serde::Deserialize;
 use serde_json::Error;
 use serde_json::Value;
@@ -21,7 +22,7 @@ enum InputKind {
 }
 
 #[derive(Debug, Deserialize)]
-struct Input {
+pub struct Input {
     name: String,
     kind: InputKind,
     source: String
@@ -31,10 +32,15 @@ impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
         for input in &spec.inputs {
-            if input.kind == FILE {
-                let file = std::fs::read_to_string(&input.source)?;
-                let value: Value = serde_json::from_str(&file)?;
-                spec.files.insert(input.name.clone(), value);
+            match input.kind {
+                FILE => {
+                    let file = std::fs::read_to_string(&input.source)?;
+                    let value: Value = serde_json::from_str(&file)?;
+                    spec.files.insert(input.name.clone(), value);
+                }
+                _ => {
+                    // TODO
+                }
             }
         }
         Ok(spec)
@@ -72,41 +78,8 @@ impl Jsonatr {
     }
 }
 
-fn test_expect(file: &str, expect: &str) {
-    let input = std::fs::read_to_string(file).unwrap();
-    let spec = Jsonatr::new(&input).unwrap();
-    let res = spec.transform().unwrap();
-    assert_eq!(res, expect)
-}
-
-#[test]
-fn test_simple()  {
-    test_expect("tests/support/simple.json",r#"{
-  "tool": "jsonatr",
-  "version": 0.1,
-  "stable": false,
-  "features": [
-    "read",
-    "write"
-  ]
-}"#);
-}
-
-#[test]
-fn test_simple_with_version()  {
-    test_expect("tests/support/simple_with_version.json",r#"{
-  "tool": "jsonatr",
-  "version": "0.1",
-  "stable": false,
-  "features": [
-    "read",
-    "write"
-  ]
-}"#);
-}
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = env::args().collect();
+     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         eprintln!("Error: expecting JSON transformation spec");
         std::process::exit(1);
@@ -116,4 +89,41 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let res = spec.transform()?;
     println!("{}", res);
     Ok(())
+}
+
+mod tests {
+    use crate::*;
+    fn test_expect(file: &str, expect: &str) {
+        let input = std::fs::read_to_string(file).unwrap();
+        let spec = Jsonatr::new(&input).unwrap();
+        let res = spec.transform().unwrap();
+        assert_eq!(res, expect)
+    }
+
+    #[test]
+    fn test_simple()  {
+        test_expect("tests/support/simple.json",r#"{
+  "tool": "jsonatr",
+  "version": 0.1,
+  "stable": false,
+  "features": [
+    "read",
+    "write"
+  ]
+}"#);
+    }
+
+    #[test]
+    fn test_simple_with_version()  {
+        test_expect("tests/support/simple_with_version.json",r#"{
+  "tool": "jsonatr",
+  "version": "0.1",
+  "stable": false,
+  "features": [
+    "read",
+    "write"
+  ]
+}"#);
+    }
+
 }
