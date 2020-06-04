@@ -1,0 +1,16 @@
+{
+  "description": "Simple output with external version",
+  "inputs": [
+    {
+      "name": "version",
+      "kind": "FILE",
+      "source": "tests/support/version.json"
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": "$version",
+    "stable": false,
+    "features": ["read", "write"]
+  }
+}
