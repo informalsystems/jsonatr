@@ -1,7 +1,7 @@
 # jsonatr
 JSON Artifact Translator
 
-**Jsonatr** aims at providing intuitive ways of combining and translating between various software artifacts in JSON format. From Linux perspective you can view `jsonatr` as lifting of the Linux `tr` command to JSON datastructures.
+**Jsonatr** aims at providing intuitive ways of combining and translating between various software artifacts in JSON format. From the Unux perspective you can view `jsonatr` as lifting the `tr` translation command from strings to JSON datastructures.
 
 Our primary motivation for the tool comes from the need to perform model-based testing of the **Tendermint** protocol implementations based on counterexamples as produced by our **Apalache** model checker. The counterexamples are produced in JSON, but they have very a minimalistic content. Real tests, on the other hand, are also JSON files, but need a lot of "meat", reflecting the data required by the implementation. Thus, the lightweight counterexamples need to be translated and expanded into the heavyweight tests: the ideal task for *Jsonatr*! As JSON-encoded data are ubiquitous in modern computing, we envision also numerous other applications for the tool.
 
