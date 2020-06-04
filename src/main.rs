@@ -72,30 +72,37 @@ impl Jsonatr {
     }
 }
 
+fn test_expect(file: &str, expect: &str) {
+    let input = std::fs::read_to_string(file).unwrap();
+    let spec = Jsonatr::new(&input).unwrap();
+    let res = spec.transform().unwrap();
+    assert_eq!(res, expect)
+}
+
 #[test]
-fn test_simple_output()  {
-    let input =
-r#"{
-  "description": "Test simple output",
-  "inputs": [],
-   "output": {
-     "tool": "jonatr",
-     "version": 0.1,
-     "stable": false,
-     "features": ["read", "write"]
-  }
-}"#;
-    let expected =
-r#"{
-  "tool": "jonatr",
+fn test_simple()  {
+    test_expect("tests/support/simple.json",r#"{
+  "tool": "jsonatr",
   "version": 0.1,
   "stable": false,
   "features": [
     "read",
     "write"
   ]
-}"#;
-    assert_eq!(Jsonatr::new(input).unwrap().transform().unwrap(), expected.to_string())
+}"#);
+}
+
+#[test]
+fn test_simple_with_version()  {
+    test_expect("tests/support/simple_with_version.json",r#"{
+  "tool": "jsonatr",
+  "version": "0.1",
+  "stable": false,
+  "features": [
+    "read",
+    "write"
+  ]
+}"#);
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
