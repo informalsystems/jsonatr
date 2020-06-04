@@ -49,7 +49,7 @@ impl Jsonatr {
                 }
                 COMMAND => {
                     let output = Command::new(&input.source).output()?;
-                    spec.commands.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).to_string()));
+                    spec.commands.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string()));
                 }
             }
         }
@@ -140,4 +140,19 @@ mod tests {
 }"#);
     }
 
+    #[test]
+    fn test_simple_with_command()  {
+        let output = Command::new("date").output().unwrap();
+        let date = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
+        test_expect("tests/support/simple_with_command.json",&format!(r#"{{
+  "tool": "jsonatr",
+  "version": 0.1,
+  "date": {},
+  "stable": false,
+  "features": [
+    "read",
+    "write"
+  ]
+}}"#, date));
+    }
 }

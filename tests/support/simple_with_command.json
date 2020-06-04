@@ -1,0 +1,17 @@
+{
+  "description": "Simple output with external version",
+  "inputs": [
+    {
+      "name": "date",
+      "kind": "COMMAND",
+      "source": "date"
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": 0.1,
+    "date": "$date",
+    "stable": false,
+    "features": ["read", "write"]
+  }
+}
