@@ -1,0 +1,16 @@
+{
+  "description": "Simple output with external version",
+  "inputs": [
+    {
+      "name": "attributes",
+      "kind": "FILE",
+      "source": "tests/support/attributes.json"
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": 0.1,
+    "stable": false,
+    "features": "$attributes.features[2:3]"
+  }
+}
