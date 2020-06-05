@@ -19,7 +19,8 @@
     "books-with-isbn": "$store..books[?(@.isbn)]",
     "cheap-books": "$store..books[?(@.price<10)]",
     "cheap-movies": "$store..movies[?(@.price<10)]",
-    "everything-cheap": "$store..[?(@.price<10)]",
+    "all-cheap": "$store..[?(@.price<10)]",
+    "all-cheap-names-and-titles": "$store..[?(@.price < 10)]['name','title']",
     "best-movies": "$store..movies[?(@.rating > 6)]",
     "best-inexpensive-movies": "$store..movies[?(@.rating>6 && @.price<10)]",
     "movies-with-brosnan": "$store..movies[?(@.star == \"Pierce Brosnan\")]"
