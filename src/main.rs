@@ -5,6 +5,7 @@ use serde_json::Value;
 use std::env;
 use std::process::Command;
 
+extern crate jsonpath_lib as jsonpath;
 use crate::InputKind::*;
 
 #[derive(Debug, Deserialize)]
@@ -65,14 +66,45 @@ impl Jsonatr {
         match v {
             Value::String(string) => {
                 if string.starts_with("$") {
-                    let key = &string[1..];
-                    if self.files.contains_key(key) {
-                        return self.files.get(key).unwrap().clone()
+                    let key: &str;
+                    let jpath: String;
+                    let jpath_start = string.find(|c:char| c == '[' || c == '.');
+                    match jpath_start {
+                        None => {
+                            key = &string[1..];
+                            jpath = "".to_string();
+                        }
+                        Some(pos) => {
+                            key = &string[1..pos];
+                            jpath = "$".to_string() + &string[pos..];
+                        }
                     }
-                    else if self.commands.contains_key(key) {
-                        return self.commands.get(key).unwrap().clone()
+                    let json =
+                        if self.files.contains_key(key) {
+                            self.files.get(key).unwrap().clone()
+                        }
+                        else if self.commands.contains_key(key) {
+                            self.commands.get(key).unwrap().clone()
+                        }
+                        else {
+                            // we do not know such key; return the string as is
+                            return Value::String(string.to_string())
+                        };
+                    if jpath.is_empty() {
+                        return json;
                     }
-
+                    else {
+                        let mut selector = jsonpath::selector(&json);
+                        match selector(&jpath) {
+                            Ok(values) => {
+                                return Value::Array(values.into_iter().cloned().collect())
+                            }
+                            Err(_) => {
+                                eprintln!("Error applying JsonPath expression {}", string);
+                                return Value::String(string.to_string())
+                            }
+                        }
+                    }
                 }
                 Value::String(string.to_string())
             }
