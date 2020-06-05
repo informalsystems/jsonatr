@@ -1,0 +1,27 @@
+{
+  "description": "JsonPath queries to the book store",
+  "inputs": [
+    {
+      "name": "store",
+      "kind": "FILE",
+      "source": "tests/support/store.json"
+    }
+  ],
+  "output": {
+    "all-book-authors": "$store.store.books[*].author",
+    "all-authors": "$store..author",
+    "all-in-store": "$store.store.*",
+    "all-prices": "$store.store..price",
+    "3rd-book": "$store..books[2]",
+    "last-book": "$store..books[-1]",
+    "first-two-books": "$store..books[0,1]",
+    "first-two-books-slice": "$store..books[:2]",
+    "books-with-isbn": "$store..books[?(@.isbn)]",
+    "cheap-books": "$store..books[?(@.price<10)]",
+    "cheap-movies": "$store..movies[?(@.price<10)]",
+    "everything-cheap": "$store..[?(@.price<10)]",
+    "best-movies": "$store..movies[?(@.rating > 6)]",
+    "best-inexpensive-movies": "$store..movies[?(@.rating>6 && @.price<10)]",
+    "movies-with-brosnan": "$store..movies[?(@.star == \"Pierce Brosnan\")]"
+  }
+}
