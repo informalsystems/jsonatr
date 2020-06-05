@@ -1,6 +1,6 @@
 {
   "tool": "jsonatr",
-  "version": "$version",
+  "version": 0.1,
   "stable": false,
   "features": ["read", "write", "jsonpath"]
 }

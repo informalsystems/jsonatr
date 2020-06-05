@@ -1,5 +1,5 @@
 {
-  "description": "Simple output with external version",
+  "description": "Simple output with features taken from external file using JsonPath expression",
   "inputs": [
     {
       "name": "attributes",
@@ -9,8 +9,8 @@
   ],
   "output": {
     "tool": "jsonatr",
-    "version": 0.1,
+    "version": "$attributes.version",
     "stable": false,
-    "features": "$attributes.features[2:3]"
+    "features": "$attributes.features[:-1]"
   }
 }
