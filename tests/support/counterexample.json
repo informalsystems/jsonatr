@@ -1,0 +1,2827 @@
+{
+  "MODULE": "counterexample",
+  "declarations": [
+    {
+      "OPERATOR": "State1",
+      "body": {
+        "and": [
+          
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State2",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "init"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 1
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State3",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "init"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 2
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State4",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "init"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State5",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "init"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "heightToVerify"
+                  },
+                  "right": 3
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "start"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State6",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "working"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "endHeight"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "isLeft"
+                      },
+                      "right": true
+                    },
+                    {
+                      "left": {
+                        "str": "startHeight"
+                      },
+                      "right": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "height"
+                  },
+                  "right": 3
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "requestHeader"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "Commits"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "header"
+                      },
+                      "right": {
+                        "record": [
+                          {
+                            "left": {
+                              "str": "NextVS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "VS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                },
+                                {
+                                  "str": "p4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "height"
+                            },
+                            "right": 1
+                          },
+                          {
+                            "left": {
+                              "str": "lastCommit"
+                            },
+                            "right": {
+                              "enum": [
+                                
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State7",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "working"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": false
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "endHeight"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "isLeft"
+                      },
+                      "right": true
+                    },
+                    {
+                      "left": {
+                        "str": "startHeight"
+                      },
+                      "right": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "height"
+                  },
+                  "right": 3
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "requestHeader"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "Commits"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "header"
+                      },
+                      "right": {
+                        "record": [
+                          {
+                            "left": {
+                              "str": "NextVS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "VS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                },
+                                {
+                                  "str": "p4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "height"
+                            },
+                            "right": 1
+                          },
+                          {
+                            "left": {
+                              "str": "lastCommit"
+                            },
+                            "right": {
+                              "enum": [
+                                
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "hdr"
+                  },
+                  "right": {
+                    "record": [
+                      {
+                        "left": {
+                          "str": "Commits"
+                        },
+                        "right": {
+                          "enum": [
+                            {
+                              "str": "p2"
+                            },
+                            {
+                              "str": "p3"
+                            },
+                            {
+                              "str": "p4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "left": {
+                          "str": "header"
+                        },
+                        "right": {
+                          "record": [
+                            {
+                              "left": {
+                                "str": "NextVS"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p3"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "left": {
+                                "str": "VS"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p2"
+                                  },
+                                  {
+                                    "str": "p3"
+                                  },
+                                  {
+                                    "str": "p4"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "left": {
+                                "str": "height"
+                              },
+                              "right": 3
+                            },
+                            {
+                              "left": {
+                                "str": "lastCommit"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p1"
+                                  },
+                                  {
+                                    "str": "p2"
+                                  },
+                                  {
+                                    "str": "p3"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "responseHeader"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State8",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "working"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": true
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "endHeight"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "isLeft"
+                      },
+                      "right": true
+                    },
+                    {
+                      "left": {
+                        "str": "startHeight"
+                      },
+                      "right": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "height"
+                  },
+                  "right": 3
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "requestHeader"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "Commits"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "header"
+                      },
+                      "right": {
+                        "record": [
+                          {
+                            "left": {
+                              "str": "NextVS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "VS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                },
+                                {
+                                  "str": "p4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "height"
+                            },
+                            "right": 1
+                          },
+                          {
+                            "left": {
+                              "str": "lastCommit"
+                            },
+                            "right": {
+                              "enum": [
+                                
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "hdr"
+                  },
+                  "right": {
+                    "record": [
+                      {
+                        "left": {
+                          "str": "Commits"
+                        },
+                        "right": {
+                          "enum": [
+                            {
+                              "str": "p2"
+                            },
+                            {
+                              "str": "p3"
+                            },
+                            {
+                              "str": "p4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "left": {
+                          "str": "header"
+                        },
+                        "right": {
+                          "record": [
+                            {
+                              "left": {
+                                "str": "NextVS"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p3"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "left": {
+                                "str": "VS"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p2"
+                                  },
+                                  {
+                                    "str": "p3"
+                                  },
+                                  {
+                                    "str": "p4"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "left": {
+                                "str": "height"
+                              },
+                              "right": 3
+                            },
+                            {
+                              "left": {
+                                "str": "lastCommit"
+                              },
+                              "right": {
+                                "enum": [
+                                  {
+                                    "str": "p1"
+                                  },
+                                  {
+                                    "str": "p2"
+                                  },
+                                  {
+                                    "str": "p3"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "responseHeader"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                {
+                  "str": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "State9",
+      "body": {
+        "and": [
+          {
+            "binary": "=",
+            "left": "state",
+            "right": {
+              "str": "finished"
+            }
+          },
+          {
+            "binary": "=",
+            "left": "tooManyFaults",
+            "right": true
+          },
+          {
+            "binary": "=",
+            "left": "requestStack",
+            "right": {
+              "tuple": [
+                
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "height",
+            "right": 3
+          },
+          {
+            "binary": "=",
+            "left": "outEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "finished"
+                  }
+                },
+                {
+                  "left": {
+                    "str": "verdict"
+                  },
+                  "right": true
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "storedSignedHeaders",
+            "right": {
+              "enum": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "Commits"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "header"
+                      },
+                      "right": {
+                        "record": [
+                          {
+                            "left": {
+                              "str": "NextVS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "VS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                },
+                                {
+                                  "str": "p4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "height"
+                            },
+                            "right": 1
+                          },
+                          {
+                            "left": {
+                              "str": "lastCommit"
+                            },
+                            "right": {
+                              "enum": [
+                                
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "Commits"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "header"
+                      },
+                      "right": {
+                        "record": [
+                          {
+                            "left": {
+                              "str": "NextVS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "VS"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                },
+                                {
+                                  "str": "p4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "left": {
+                              "str": "height"
+                            },
+                            "right": 3
+                          },
+                          {
+                            "left": {
+                              "str": "lastCommit"
+                            },
+                            "right": {
+                              "enum": [
+                                {
+                                  "str": "p1"
+                                },
+                                {
+                                  "str": "p2"
+                                },
+                                {
+                                  "str": "p3"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "inEvent",
+            "right": {
+              "record": [
+                {
+                  "left": {
+                    "str": "type"
+                  },
+                  "right": {
+                    "str": "None"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "Faulty",
+            "right": {
+              "enum": [
+                {
+                  "str": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "blockchain",
+            "right": {
+              "tuple": [
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 1
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 2
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "record": [
+                    {
+                      "left": {
+                        "str": "NextVS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "VS"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          },
+                          {
+                            "str": "p4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "left": {
+                        "str": "height"
+                      },
+                      "right": 3
+                    },
+                    {
+                      "left": {
+                        "str": "lastCommit"
+                      },
+                      "right": {
+                        "enum": [
+                          {
+                            "str": "p1"
+                          },
+                          {
+                            "str": "p2"
+                          },
+                          {
+                            "str": "p3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "binary": "=",
+            "left": "minTrustedHeight",
+            "right": 1
+          }
+        ]
+      },
+      "params": [
+        
+      ]
+    },
+    {
+      "OPERATOR": "InvariantViolation",
+      "body": {
+        "and": [
+          {
+            "and": [
+              {
+                "binary": "=",
+                "left": {
+                  "apply-fun": "outEvent",
+                  "arg": {
+                    "str": "type"
+                  }
+                },
+                "right": {
+                  "str": "finished"
+                }
+              },
+              {
+                "binary": "=",
+                "left": {
+                  "apply-fun": "outEvent",
+                  "arg": {
+                    "str": "verdict"
+                  }
+                },
+                "right": true
+              }
+            ]
+          },
+          "tooManyFaults"
+        ]
+      },
+      "params": [
+        
+      ]
+    }
+  ]
+}
