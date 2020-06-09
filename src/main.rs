@@ -9,6 +9,8 @@ use regex::Regex;
 extern crate jsonpath_lib as jsonpath;
 use crate::InputKind::*;
 
+#[macro_use]
+extern crate simple_error;
 
 struct Expr {
     input: String,
@@ -48,6 +50,9 @@ impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
         for input in &spec.input {
+            if spec.inputs.contains_key(&input.name) {
+                bail!("double definition of input '{}'", input.name)
+            }
             match &input.kind {
                 FILE => {
                     let file = std::fs::read_to_string(&input.source)?;
@@ -132,7 +137,7 @@ impl Jsonatr {
     }
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         eprintln!("Error: expecting JSON transformation spec");
@@ -143,6 +148,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let res = spec.transform()?;
     println!("{}", res);
     Ok(())
+}
+
+fn main() {
+    match run() {
+        Ok(_) => (),
+        Err(e) => println!("Error: {}", e)
+    }
 }
 
 mod tests {

@@ -1,6 +1,6 @@
 {
   "description": "Simple output with features taken from external file using JsonPath expression",
-  "inputs": [
+  "input": [
     {
       "name": "attributes",
       "kind": "FILE",
