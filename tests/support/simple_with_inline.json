@@ -1,0 +1,25 @@
+{
+  "description": "Simple output with features taken from external file using JsonPath expression",
+  "input": [
+    {
+      "name": "version",
+      "kind": "FILE",
+      "source": "tests/support/version.json"
+    },
+    {
+      "name": "stableVersion",
+      "kind": "INLINE",
+      "source": {
+        "date": "Tue Jun  9 16:16:24 CEST 2020",
+        "version": "$version"
+      }
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": "$version",
+    "stable-version": "$stableVersion",
+    "stable": false,
+    "features": ["read", "write"]
+  }
+}

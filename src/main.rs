@@ -33,14 +33,15 @@ struct Jsonatr {
 #[derive(Debug, Deserialize, PartialEq)]
 enum InputKind {
     FILE,
-    COMMAND
+    COMMAND,
+    INLINE
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Input {
     name: String,
     kind: InputKind,
-    source: String,
+    source: Value,
 
     #[serde(default)]
     args: Vec<String>
@@ -55,13 +56,17 @@ impl Jsonatr {
             }
             match &input.kind {
                 FILE => {
-                    let file = std::fs::read_to_string(&input.source)?;
+                    let file = std::fs::read_to_string(&input.source.as_str().unwrap())?; // TODO
                     let value: Value = serde_json::from_str(&file)?;
                     spec.inputs.insert(input.name.clone(), value);
                 }
                 COMMAND => {
-                    let output = Command::new(&input.source).output()?;
+                    let output = Command::new(&input.source.as_str().unwrap()).output()?; // TODO
                     spec.inputs.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string()));
+                },
+                INLINE => {
+                    let transformed = spec.transform_value(&input.source);
+                    spec.inputs.insert(input.name.clone(), transformed);
                 }
             }
         }
