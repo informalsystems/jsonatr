@@ -91,48 +91,30 @@ impl Jsonatr {
         serde_json::to_string_pretty(&transformed_output)
     }
 
+    fn transform_string(&self, text: &String) -> Option<Value> {
+        let expr = self.parse_expr(text)?;
+        let json = self.inputs.get(&expr.input)?;
+        let mut selector = jsonpath::selector(&json);
+        match selector(&expr.jpath) {
+            Ok(values) => {
+                Some(Value::Array(values.into_iter().cloned().collect()))
+            }
+            Err(_) => {
+                eprintln!("Error applying JsonPath expression {}", expr.jpath);
+                None
+            }
+        }
+    }
+
     fn transform_value(&self, v: &Value) -> Value {
         match v {
             Value::String(string) => {
-                if string.starts_with("$") {
-                    let key: &str;
-                    let jpath: String;
-                    let jpath_start = string.find(|c:char| c == '[' || c == '.');
-                    match jpath_start {
-                        None => {
-                            key = &string[1..];
-                            jpath = "".to_string();
-                        }
-                        Some(pos) => {
-                            key = &string[1..pos];
-                            jpath = "$".to_string() + &string[pos..];
-                        }
-                    }
-                    let json =
-                        if self.inputs.contains_key(key) {
-                            self.inputs.get(key).unwrap().clone()
-                        }
-                        else {
-                            // we do not know such key; return the string as is
-                            return Value::String(string.to_string())
-                        };
-                    if jpath.is_empty() {
-                        return json;
-                    }
-                    else {
-                        let mut selector = jsonpath::selector(&json);
-                        match selector(&jpath) {
-                            Ok(values) => {
-                                return Value::Array(values.into_iter().cloned().collect())
-                            }
-                            Err(_) => {
-                                eprintln!("Error applying JsonPath expression {}", string);
-                                return Value::String(string.to_string())
-                            }
-                        }
-                    }
+                if let Some(value) = self.transform_string(string) {
+                    value
                 }
-                Value::String(string.to_string())
+                else {
+                    v.clone()
+                }
             }
             Value::Array(values) => {
                 let new_values = values.iter().map(|x| self.transform_value(x)).collect();
