@@ -1,6 +1,6 @@
 {
   "description": "JsonPath queries to the book store",
-  "inputs": [
+  "input": [
     {
       "name": "store",
       "kind": "FILE",

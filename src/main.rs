@@ -18,16 +18,14 @@ struct Expr {
 
 #[derive(Debug, Deserialize)]
 struct Jsonatr {
-    description: String,
-    inputs: Vec<Input>,
+    input: Vec<Input>,
     output: Value,
 
-    #[serde(skip)]
-    files: std::collections::HashMap<String, Value>,
+    #[serde(default)]
+    description: String,
 
     #[serde(skip)]
-    commands: std::collections::HashMap<String, Value>
-
+    inputs: std::collections::HashMap<String, Value>
 }
 
 #[derive(Debug, Deserialize, PartialEq)]
@@ -49,16 +47,16 @@ pub struct Input {
 impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
-        for input in &spec.inputs {
+        for input in &spec.input {
             match &input.kind {
                 FILE => {
                     let file = std::fs::read_to_string(&input.source)?;
                     let value: Value = serde_json::from_str(&file)?;
-                    spec.files.insert(input.name.clone(), value);
+                    spec.inputs.insert(input.name.clone(), value);
                 }
                 COMMAND => {
                     let output = Command::new(&input.source).output()?;
-                    spec.commands.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string()));
+                    spec.inputs.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string()));
                 }
             }
         }
@@ -69,7 +67,7 @@ impl Jsonatr {
     // $<input><jsonpath> (| <transform>)*
     //   <input> is an identifier, referring to an some of the inputs
     //   <jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
-    //   (| <transform>)* is a pipe-separated sequence if transforms, each being an identifier
+    //   (| <transform>)* is a pipe-separated sequence of transforms, each being an identifier
     fn parse_expr(text: &str) -> Option<Expr> {
         let input_re = Regex::new(r"^\$([[:alpha:]_][[:word:]_]*)").unwrap();
         match input_re.captures(text) {
@@ -82,15 +80,13 @@ impl Jsonatr {
                     transforms.insert(0, transform_cap[1].to_string());
                     end -= transform_cap[0].len();
                 }
-                return Some(Expr {
+                Some(Expr {
                     input: input_cap[1].to_string(),
                     jpath: "$".to_string() + &text[start..end],
                     transforms
                 })
             }
-            None => {
-                return None
-            }
+            None => None
         }
     }
 
@@ -117,11 +113,8 @@ impl Jsonatr {
                         }
                     }
                     let json =
-                        if self.files.contains_key(key) {
-                            self.files.get(key).unwrap().clone()
-                        }
-                        else if self.commands.contains_key(key) {
-                            self.commands.get(key).unwrap().clone()
+                        if self.inputs.contains_key(key) {
+                            self.inputs.get(key).unwrap().clone()
                         }
                         else {
                             // we do not know such key; return the string as is

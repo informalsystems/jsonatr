@@ -1,6 +1,6 @@
 {
   "description": "JsonPath queries to the Apalache counterexample. We are interested only in the last counterexample state",
-  "inputs": [
+  "input": [
     {
       "name": "ce",
       "kind": "FILE",

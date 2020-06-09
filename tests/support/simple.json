@@ -1,6 +1,6 @@
 {
   "description": "Simple output",
-  "inputs": [],
+  "input": [],
   "output": {
     "tool": "jsonatr",
     "version": 0.1,

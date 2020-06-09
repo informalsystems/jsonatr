@@ -1,6 +1,6 @@
 {
   "description": "Simple output with external version",
-  "inputs": [
+  "input": [
     {
       "name": "date",
       "kind": "COMMAND",
