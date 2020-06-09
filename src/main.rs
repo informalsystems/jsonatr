@@ -68,26 +68,22 @@ impl Jsonatr {
     //   <input> is an identifier, referring to an some of the inputs
     //   <jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
     //   (| <transform>)* is a pipe-separated sequence of transforms, each being an identifier
-    fn parse_expr(text: &str) -> Option<Expr> {
+    fn parse_expr(&self, text: &str) -> Option<Expr> {
         let input_re = Regex::new(r"^\$([[:alpha:]_][[:word:]_]*)").unwrap();
-        match input_re.captures(text) {
-            Some(input_cap) => {
-                let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:alpha:]_][[:word:]_]*)[ \t]*$").unwrap();
-                let start = input_cap[0].len();
-                let mut end = text.len();
-                let mut transforms: Vec<String> = Vec::new();
-                while let Some(transform_cap) = transform_re.captures(&text[start..end]) {
-                    transforms.insert(0, transform_cap[1].to_string());
-                    end -= transform_cap[0].len();
-                }
-                Some(Expr {
-                    input: input_cap[1].to_string(),
-                    jpath: "$".to_string() + &text[start..end],
-                    transforms
-                })
-            }
-            None => None
+        let input_cap = input_re.captures(text)?;
+        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:alpha:]_][[:word:]_]*)[ \t]*$").unwrap();
+        let start = input_cap[0].len();
+        let mut end = text.len();
+        let mut transforms: Vec<String> = Vec::new();
+        while let Some(transform_cap) = transform_re.captures(&text[start..end]) {
+            transforms.insert(0, transform_cap[1].to_string());
+            end -= transform_cap[0].len();
         }
+        Some(Expr {
+            input: input_cap[1].to_string(),
+            jpath: "$".to_string() + &text[start..end],
+            transforms
+        })
     }
 
     fn transform(&self) -> Result<String, Error> {
