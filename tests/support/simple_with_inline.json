@@ -1,5 +1,5 @@
 {
-  "description": "Simple output with features taken from external file using JsonPath expression",
+  "description": "Simple output with inline input, referring to the previous input",
   "input": [
     {
       "name": "version",

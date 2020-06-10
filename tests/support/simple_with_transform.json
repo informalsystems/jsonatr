@@ -1,0 +1,21 @@
+{
+  "description": "Simple output with transformations",
+  "input": [
+    {
+      "name": "attributes",
+      "kind": "FILE",
+      "source": "tests/support/attributes.json"
+    },
+    {
+      "name": "features",
+      "kind": "INLINE",
+      "source": "$[0].features"
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": 0.1,
+    "stable": false,
+    "features": "$attributes | features"
+  }
+}

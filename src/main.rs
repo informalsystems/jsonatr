@@ -32,9 +32,10 @@ struct Jsonatr {
 
 #[derive(Debug, Deserialize, PartialEq)]
 enum InputKind {
-    FILE,
-    COMMAND,
-    INLINE
+    INLINE, // inline JSON
+    FILE, // external JSON file
+    COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
+  //  INLINE_TRANSFORM // inline JSON transformation, that can reference the input via $.
 }
 
 #[derive(Debug, Deserialize)]
@@ -58,14 +59,17 @@ impl Jsonatr {
                 FILE => {
                     let file = std::fs::read_to_string(&input.source.as_str().unwrap())?; // TODO
                     let value: Value = serde_json::from_str(&file)?;
-                    spec.inputs.insert(input.name.clone(), value);
+                    let transformed = spec.transform_value(&value, &Value::Null);
+                    spec.inputs.insert(input.name.clone(), transformed);
                 }
                 COMMAND => {
                     let output = Command::new(&input.source.as_str().unwrap()).output()?; // TODO
-                    spec.inputs.insert(input.name.clone(), Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string()));
+                    let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
+                    let transformed = spec.transform_value(&value, &Value::Null);
+                    spec.inputs.insert(input.name.clone(), transformed);
                 },
                 INLINE => {
-                    let transformed = spec.transform_value(&input.source);
+                    let transformed = spec.transform_value(&input.source, &Value::Null);
                     spec.inputs.insert(input.name.clone(), transformed);
                 }
             }
@@ -74,14 +78,14 @@ impl Jsonatr {
     }
 
     // parses a Jsonatr expression, which is of the form
-    // $<input><jsonpath> (| <transform>)*
+    // $<input>.<jsonpath> (| <transform>)*
     //   <input> is an identifier, referring to an some of the inputs
-    //   <jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
+    //   $.<jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
     //   (| <transform>)* is a pipe-separated sequence of transforms, each being an identifier
     fn parse_expr(&self, text: &str) -> Option<Expr> {
-        let input_re = Regex::new(r"^\$([[:alpha:]_][[:word:]_]*)").unwrap();
-        let input_cap = input_re.captures(text)?;
-        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:alpha:]_][[:word:]_]*)[ \t]*$").unwrap();
+        let input_re = Regex::new(r"^\$([[:word:]]*)").unwrap();
+        let input_cap = input_re.captures(text)?; // parsing fails if text doesn't contain input
+        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*$").unwrap();
         let start = input_cap[0].len();
         let mut end = text.len();
         let mut transforms: Vec<String> = Vec::new();
@@ -97,15 +101,24 @@ impl Jsonatr {
     }
 
     fn transform(&self) -> Result<String, Error> {
-        let transformed_output = self.transform_value(&self.output);
+        let transformed_output = self.transform_value(&self.output, &Value::Null);
         serde_json::to_string_pretty(&transformed_output)
     }
 
-    fn transform_string(&self, text: &String) -> Option<Value> {
+    fn transform_string(&self, text: &String, root: &Value) -> Option<Value> {
+        println!("transform text: {}", text);
+        println!("transform root: {}", root);
+
         let expr = self.parse_expr(text)?;
-        let json = self.inputs.get(&expr.input)?;
+        let json = match expr.input.as_str() {
+            "" => match root {
+                Value::Null => None,
+                x => Some(x)
+            }
+            _ => self.inputs.get(&expr.input)
+        }?;
         let mut selector = jsonpath::selector(&json);
-        match selector(&expr.jpath) {
+        let mut value = match selector(&expr.jpath) {
             Ok(values) => {
                 Some(Value::Array(values.into_iter().cloned().collect()))
             }
@@ -113,27 +126,34 @@ impl Jsonatr {
                 eprintln!("Error applying JsonPath expression {}", expr.jpath);
                 None
             }
+        }?;
+        for transform_name in expr.transforms {
+            let transform = self.inputs.get(&transform_name)?;
+            value = self.transform_value(transform, &value);
         }
+        Some(value)
     }
 
-    fn transform_value(&self, v: &Value) -> Value {
+    fn transform_value(&self, v: &Value, input: &Value) -> Value {
         match v {
             Value::String(string) => {
-                if let Some(value) = self.transform_string(string) {
+                if let Some(value) = self.transform_string(string, input) {
+                    println!("transform result: {}", value);
                     value
                 }
                 else {
+                    println!("transform result: {}", v);
                     v.clone()
                 }
             }
             Value::Array(values) => {
-                let new_values = values.iter().map(|x| self.transform_value(x)).collect();
+                let new_values = values.iter().map(|x| self.transform_value(x, input)).collect();
                 Value::Array(new_values)
             },
             Value::Object(values) => {
                 let mut new_values: serde_json::map::Map<String, Value> = serde_json::map::Map::new();
                 for (k,v) in values.iter() {
-                    new_values.insert(k.to_string(),self.transform_value(v));
+                    new_values.insert(k.to_string(),self.transform_value(v, input));
                 }
                 Value::Object(new_values)
             },
