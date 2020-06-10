@@ -9,7 +9,7 @@
     {
       "name": "features",
       "kind": "INLINE",
-      "source": "$[0].features"
+      "source": "$.features"
     }
   ],
   "output": {

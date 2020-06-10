@@ -95,7 +95,7 @@ impl Jsonatr {
         }
         Some(Expr {
             input: input_cap[1].to_string(),
-            jpath: "$".to_string() + &text[start..end],
+            jpath: text[start..end].to_string(),
             transforms
         })
     }
@@ -117,16 +117,21 @@ impl Jsonatr {
             }
             _ => self.inputs.get(&expr.input)
         }?;
-        let mut selector = jsonpath::selector(&json);
-        let mut value = match selector(&expr.jpath) {
-            Ok(values) => {
-                Some(Value::Array(values.into_iter().cloned().collect()))
-            }
-            Err(_) => {
-                eprintln!("Error applying JsonPath expression {}", expr.jpath);
-                None
-            }
-        }?;
+        let mut value: Value;
+        if expr.jpath.is_empty() {
+            value = json.clone()
+        }
+        else {
+            value = match jsonpath::select(&json, ("$".to_string() + &expr.jpath).as_str()) {
+                Ok(values) => {
+                    Some(Value::Array(values.into_iter().cloned().collect()))
+                }
+                Err(_) => {
+                    eprintln!("Error applying JsonPath expression {}", expr.jpath);
+                    None
+                }
+            }?;
+        }
         for transform_name in expr.transforms {
             let transform = self.inputs.get(&transform_name)?;
             value = self.transform_value(transform, &value);
