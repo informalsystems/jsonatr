@@ -3,12 +3,13 @@ use serde::Deserialize;
 use serde_json::Error;
 use serde_json::Value;
 use std::env;
-use std::process::Command;
+use std::process::{Command, Stdio};
 use regex::Regex;
 
 extern crate jsonpath_lib as jsonpath;
 extern crate shell_words;
 use crate::InputKind::*;
+use std::io::{Write, Read};
 
 #[macro_use]
 extern crate simple_error;
@@ -30,21 +31,20 @@ struct Jsonatr {
     description: String,
 
     #[serde(skip)]
-    inputs: std::collections::HashMap<String, Value>,
+    inputs: std::collections::HashMap<String, Input>,
 
     #[serde(skip)]
     builtins: Transforms
 }
 
-#[derive(Debug, Deserialize, PartialEq)]
+#[derive(Debug, Deserialize, PartialEq, Clone)]
 enum InputKind {
     INLINE, // inline JSON
     FILE, // external JSON file
     COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
-  //  INLINE_TRANSFORM // inline JSON transformation, that can reference the input via $.
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Input {
     name: String,
     kind: InputKind,
@@ -65,45 +65,7 @@ impl Jsonatr {
             if spec.inputs.contains_key(&input.name) {
                 bail!("double definition of input '{}'", input.name)
             }
-            match &input.kind {
-                FILE => {
-                    if let Some(path) = input.source.as_str() {
-                        let file = std::fs::read_to_string(path)?;
-                        let value: Value = serde_json::from_str(&file)?;
-                        let transformed = spec.transform_value(&value, &Value::Null);
-                        spec.inputs.insert(input.name.clone(), transformed);
-                    }
-                    else {
-                        bail!("non-string provided as source for input '{}'", input.name)
-                    }
-                }
-                COMMAND => {
-                    if let Some(command) = input.source.as_str() {
-                        match shell_words::split(command) {
-                            Ok(args) => {
-                                if args.len() < 1 {
-                                    bail!("failed to parse command for input '{}'", input.name);
-                                }
-                                let output = Command::new(&args[0])
-                                    .args(&args[1..])
-                                    .output()?;
-                                let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
-                                let transformed = spec.transform_value(&value, &Value::Null);
-                                spec.inputs.insert(input.name.clone(), transformed);
-                            }
-                            Err(_) => bail!("failed to parse command for input '{}'", input.name)
-                        }
-
-                    }
-                    else {
-                        bail!("non-string provided as source for input '{}'", input.name)
-                    }
-                },
-                INLINE => {
-                    let transformed = spec.transform_value(&input.source, &Value::Null);
-                    spec.inputs.insert(input.name.clone(), transformed);
-                }
-            }
+            spec.inputs.insert(input.name.clone(), input.clone());
         }
         Ok(spec)
     }
@@ -140,6 +102,63 @@ impl Jsonatr {
         })
     }
 
+    fn apply_input(&self, name: &String, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
+        let input = require_with!(self.inputs.get(name), "found reference to unknown input '{}'", name);
+        let result: Value;
+        match input.kind {
+            INLINE => {
+                result = self.transform_value(&input.source, root);
+            },
+            FILE => {
+                if let Some(path) = input.source.as_str() {
+                    let file = std::fs::read_to_string(path)?;
+                    let value = serde_json::from_str(&file)?;
+                    result = self.transform_value(&value, &root);
+                }
+                else {
+                    bail!("non-string provided as source for input '{}'", input.name)
+                }
+            }
+            COMMAND => {
+                if let Some(command) = input.source.as_str() {
+                    match shell_words::split(command) {
+                        Ok(args) => {
+                            if args.len() < 1 {
+                                bail!("failed to parse command for input '{}'", input.name);
+                            }
+
+                            let process = match Command::new(&args[0])
+                                .args(&args[1..])
+                                .stdin(Stdio::piped())
+                                .stdout(Stdio::piped())
+                                .spawn() {
+                                Err(_) => bail!("failed to run command for input '{}'", input.name),
+                                Ok(process) => process,
+                            };
+
+                            match process.stdin.unwrap().write_all(serde_json::to_string(root).unwrap().as_bytes()) {
+                                Err(_) => bail!("couldn't write to command stdin for input '{}'", input.name),
+                                Ok(_) => (),
+                            }
+                            let mut s = String::new();
+                            match process.stdout.unwrap().read_to_string(&mut s) {
+                                Err(_) => bail!("couldn't read from command stdout for input '{}", input.name),
+                                Ok(_) => (),
+                            }
+                            result = Value::String(s.trim_end().to_string())
+                        }
+                        Err(_) => bail!("failed to parse command for input '{}'", input.name)
+                    }
+
+                }
+                else {
+                    bail!("non-string provided as source for input '{}'", input.name)
+                }
+            }
+        };
+        Ok(result)
+    }
+
     fn transform(&self) -> Result<String, Error> {
         let transformed_output = self.transform_value(&self.output, &Value::Null);
         serde_json::to_string_pretty(&transformed_output)
@@ -153,9 +172,12 @@ impl Jsonatr {
         let json = match expr.input.as_str() {
             "" => match root {
                 Value::Null => None,
-                x => Some(x)
+                x => Some(x.clone())
             }
-            _ => self.inputs.get(&expr.input)
+            _ => match self.apply_input(&expr.input, root) {
+                Ok(v) => Some(v),
+                Err(_) => None
+            }
         }?;
         let mut value: Value;
         if expr.jpath.is_empty() {
@@ -182,8 +204,14 @@ impl Jsonatr {
                     }
                 }
             }
-            else if let Some(transform) = self.inputs.get(&transform_name) {
-                value = self.transform_value(transform, &value);
+            else {
+                match self.apply_input(&transform_name, &value) {
+                    Ok(new_value) => value = new_value,
+                    Err(_) => {
+                        eprintln!("Error: failed to apply input transform '{}'", transform_name);
+                        return None
+                    }
+                }
             }
         }
         Some(value)
