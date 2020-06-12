@@ -16,6 +16,6 @@
     "tool": "jsonatr",
     "version": 0.1,
     "stable": false,
-    "features": "$attributes | features"
+    "features": "$attributes | features | unwrap"
   }
 }

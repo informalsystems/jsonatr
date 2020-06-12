@@ -18,6 +18,8 @@ struct Expr {
     transforms: Vec<String>
 }
 
+type Transforms = std::collections::HashMap<String, fn(Value) -> Option<Value>>;
+
 #[derive(Debug, Deserialize)]
 struct Jsonatr {
     input: Vec<Input>,
@@ -27,7 +29,10 @@ struct Jsonatr {
     description: String,
 
     #[serde(skip)]
-    inputs: std::collections::HashMap<String, Value>
+    inputs: std::collections::HashMap<String, Value>,
+
+    #[serde(skip)]
+    builtins: Transforms
 }
 
 #[derive(Debug, Deserialize, PartialEq)]
@@ -51,7 +56,11 @@ pub struct Input {
 impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
+        spec.builtins.insert("unwrap".to_string(),Jsonatr::builtin_unwrap);
         for input in &spec.input {
+            if spec.builtins.contains_key(&input.name) {
+                bail!("can't define input '{}' because of the builtin function with the same name", input.name)
+            }
             if spec.inputs.contains_key(&input.name) {
                 bail!("double definition of input '{}'", input.name)
             }
@@ -75,6 +84,15 @@ impl Jsonatr {
             }
         }
         Ok(spec)
+    }
+
+    // assumes that the value is a singleton array; transforms array into its single element
+    fn builtin_unwrap(v: Value) -> Option<Value> {
+        let arr = v.as_array()?;
+        match arr.len() {
+            1 => Some(arr[0].clone()),
+            _ => None
+        }
     }
 
     // parses a Jsonatr expression, which is of the form
@@ -133,8 +151,12 @@ impl Jsonatr {
             }?;
         }
         for transform_name in expr.transforms {
-            let transform = self.inputs.get(&transform_name)?;
-            value = self.transform_value(transform, &value);
+            if let Some(builtin) = self.builtins.get(&transform_name) {
+                value = builtin(value)?
+            }
+            else if let Some(transform) = self.inputs.get(&transform_name) {
+                value = self.transform_value(transform, &value);
+            }
         }
         Some(value)
     }
