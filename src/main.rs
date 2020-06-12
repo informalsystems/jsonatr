@@ -145,14 +145,20 @@ impl Jsonatr {
                     Some(Value::Array(values.into_iter().cloned().collect()))
                 }
                 Err(_) => {
-                    eprintln!("Error applying JsonPath expression {}", expr.jpath);
+                    eprintln!("Error: failed to apply JsonPath expression '{}'", expr.jpath);
                     None
                 }
             }?;
         }
         for transform_name in expr.transforms {
             if let Some(builtin) = self.builtins.get(&transform_name) {
-                value = builtin(value)?
+                match builtin(value) {
+                    Some(new_value) => value = new_value,
+                    None => {
+                        eprintln!("Error: failed to apply builtin transform '{}'", transform_name);
+                        return None
+                    }
+                }
             }
             else if let Some(transform) = self.inputs.get(&transform_name) {
                 value = self.transform_value(transform, &value);
