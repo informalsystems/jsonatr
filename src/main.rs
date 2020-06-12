@@ -66,16 +66,26 @@ impl Jsonatr {
             }
             match &input.kind {
                 FILE => {
-                    let file = std::fs::read_to_string(&input.source.as_str().unwrap())?; // TODO
-                    let value: Value = serde_json::from_str(&file)?;
-                    let transformed = spec.transform_value(&value, &Value::Null);
-                    spec.inputs.insert(input.name.clone(), transformed);
+                    if let Some(path) = input.source.as_str() {
+                        let file = std::fs::read_to_string(path)?; // TODO
+                        let value: Value = serde_json::from_str(&file)?;
+                        let transformed = spec.transform_value(&value, &Value::Null);
+                        spec.inputs.insert(input.name.clone(), transformed);
+                    }
+                    else {
+                        bail!("non-string provided as source for '{}'", input.name)
+                    }
                 }
                 COMMAND => {
-                    let output = Command::new(&input.source.as_str().unwrap()).output()?; // TODO
-                    let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
-                    let transformed = spec.transform_value(&value, &Value::Null);
-                    spec.inputs.insert(input.name.clone(), transformed);
+                    if let Some(command) = input.source.as_str() {
+                        let output = Command::new(command).output()?; // TODO
+                        let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
+                        let transformed = spec.transform_value(&value, &Value::Null);
+                        spec.inputs.insert(input.name.clone(), transformed);
+                    }
+                    else {
+                        bail!("non-string provided as source for '{}'", input.name)
+                    }
                 },
                 INLINE => {
                     let transformed = spec.transform_value(&input.source, &Value::Null);
@@ -124,8 +134,8 @@ impl Jsonatr {
     }
 
     fn transform_string(&self, text: &String, root: &Value) -> Option<Value> {
-        println!("transform text: {}", text);
-        println!("transform root: {}", root);
+        //println!("transform text: {}", text);
+        //println!("transform root: {}", root);
 
         let expr = self.parse_expr(text)?;
         let json = match expr.input.as_str() {
@@ -171,11 +181,11 @@ impl Jsonatr {
         match v {
             Value::String(string) => {
                 if let Some(value) = self.transform_string(string, input) {
-                    println!("transform result: {}", value);
+                    //println!("transform result: {}", value);
                     value
                 }
                 else {
-                    println!("transform result: {}", v);
+                    //println!("transform result: {}", v);
                     v.clone()
                 }
             }
