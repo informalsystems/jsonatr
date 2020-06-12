@@ -127,7 +127,7 @@ impl Jsonatr {
                                 bail!("failed to parse command for input '{}'", input.name);
                             }
 
-                            let process = match Command::new(&args[0])
+                            let mut process = match Command::new(&args[0])
                                 .args(&args[1..])
                                 .stdin(Stdio::piped())
                                 .stdout(Stdio::piped())
@@ -136,16 +136,23 @@ impl Jsonatr {
                                 Ok(process) => process,
                             };
 
-                            match process.stdin.unwrap().write_all(serde_json::to_string(root).unwrap().as_bytes()) {
+                            match &process.stdin.as_mut().unwrap().write(serde_json::to_string(root).unwrap().as_bytes()) {
                                 Err(_) => bail!("couldn't write to command stdin for input '{}'", input.name),
                                 Ok(_) => (),
                             }
-                            let mut s = String::new();
-                            match process.stdout.unwrap().read_to_string(&mut s) {
+                            let status = process.wait()?;
+                            if !status.success() {
+                                bail!("failed to execute command for input '{}': {}", input.name, status.to_string())
+                            }
+                            let mut output = String::new();
+                            match process.stdout.unwrap().read_to_string(&mut output) {
                                 Err(_) => bail!("couldn't read from command stdout for input '{}", input.name),
                                 Ok(_) => (),
                             }
-                            result = Value::String(s.trim_end().to_string())
+                            match serde_json::from_str(&output) {
+                                Err(_) => result = Value::String(output.trim_end().to_string()),
+                                Ok(value) => result = value
+                            }
                         }
                         Err(_) => bail!("failed to parse command for input '{}'", input.name)
                     }
@@ -207,8 +214,8 @@ impl Jsonatr {
             else {
                 match self.apply_input(&transform_name, &value) {
                     Ok(new_value) => value = new_value,
-                    Err(_) => {
-                        eprintln!("Error: failed to apply input transform '{}'", transform_name);
+                    Err(e) => {
+                        eprintln!("Error: failed to apply input transform '{}'; reason: {}", transform_name, e.to_string());
                         return None
                     }
                 }
