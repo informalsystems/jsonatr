@@ -4,7 +4,7 @@
     {
       "name": "date",
       "kind": "COMMAND",
-      "source": "date"
+      "source": "date -I"
     }
   ],
   "output": {

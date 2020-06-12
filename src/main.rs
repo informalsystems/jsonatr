@@ -7,6 +7,7 @@ use std::process::Command;
 use regex::Regex;
 
 extern crate jsonpath_lib as jsonpath;
+extern crate shell_words;
 use crate::InputKind::*;
 
 #[macro_use]
@@ -67,24 +68,35 @@ impl Jsonatr {
             match &input.kind {
                 FILE => {
                     if let Some(path) = input.source.as_str() {
-                        let file = std::fs::read_to_string(path)?; // TODO
+                        let file = std::fs::read_to_string(path)?;
                         let value: Value = serde_json::from_str(&file)?;
                         let transformed = spec.transform_value(&value, &Value::Null);
                         spec.inputs.insert(input.name.clone(), transformed);
                     }
                     else {
-                        bail!("non-string provided as source for '{}'", input.name)
+                        bail!("non-string provided as source for input '{}'", input.name)
                     }
                 }
                 COMMAND => {
                     if let Some(command) = input.source.as_str() {
-                        let output = Command::new(command).output()?; // TODO
-                        let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
-                        let transformed = spec.transform_value(&value, &Value::Null);
-                        spec.inputs.insert(input.name.clone(), transformed);
+                        match shell_words::split(command) {
+                            Ok(args) => {
+                                if args.len() < 1 {
+                                    bail!("failed to parse command for input '{}'", input.name);
+                                }
+                                let output = Command::new(&args[0])
+                                    .args(&args[1..])
+                                    .output()?;
+                                let value = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
+                                let transformed = spec.transform_value(&value, &Value::Null);
+                                spec.inputs.insert(input.name.clone(), transformed);
+                            }
+                            Err(_) => bail!("failed to parse command for input '{}'", input.name)
+                        }
+
                     }
                     else {
-                        bail!("non-string provided as source for '{}'", input.name)
+                        bail!("non-string provided as source for input '{}'", input.name)
                     }
                 },
                 INLINE => {
@@ -262,7 +274,7 @@ mod tests {
 
     #[test]
     fn test_simple_with_command()  {
-        let output = Command::new("date").output().unwrap();
+        let output = Command::new("date").args(&["-I"]).output().unwrap();
         let date = Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
         test_expect("tests/support/simple_with_command.json",&format!(r#"{{
   "tool": "jsonatr",
