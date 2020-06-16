@@ -17,18 +17,15 @@ extern crate simple_error;
 struct Expr {
     input: String,
     jpath: String,
-    transforms: Vec<String>
+    transforms: Vec<(String,Vec<String>)>
 }
 
-type Transforms = std::collections::HashMap<String, fn(Value) -> Option<Value>>;
+type Transforms = std::collections::HashMap<String, fn(Value, &Vec<String>) -> Option<Value>>;
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Jsonatr {
     input: Vec<Input>,
     output: Value,
-
-    #[serde(default)]
-    description: String,
 
     #[serde(skip)]
     inputs: std::collections::HashMap<String, Input>,
@@ -71,7 +68,7 @@ impl Jsonatr {
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
-    fn builtin_unwrap(v: Value) -> Option<Value> {
+    fn builtin_unwrap(v: Value, _args: &Vec<String>) -> Option<Value> {
         let arr = v.as_array()?;
         match arr.len() {
             1 => Some(arr[0].clone()),
@@ -80,20 +77,28 @@ impl Jsonatr {
     }
 
     // parses a Jsonatr expression, which is of the form
-    // $<input>.<jsonpath> (| <transform>)*
+    // $<input>.<jsonpath> [| <transform>]*
     //   <input> is an identifier, referring to an some of the inputs
     //   $.<jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
-    //   (| <transform>)* is a pipe-separated sequence of transforms, each being an identifier
+    //   [| <transform> [(arg,...)]]* is a pipe-separated sequence of transforms,
+    // each transform being an identifier with optional arguments
     fn parse_expr(&self, text: &str) -> Option<Expr> {
         let input_re = Regex::new(r"^\$([[:word:]]*)").unwrap();
+        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*(?:\([ \t]*([^)]*?)[ \t]*\))?[ \t]*$").unwrap();
+        let sep_re = Regex::new(r"[ \t]*,[ \t]*").unwrap();
+
         let input_cap = input_re.captures(text)?; // parsing fails if text doesn't contain input
-        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*$").unwrap();
         let start = input_cap[0].len();
         let mut end = text.len();
-        let mut transforms: Vec<String> = Vec::new();
+        let mut transforms: Vec<(String,Vec<String>)> = Vec::new();
         while let Some(transform_cap) = transform_re.captures(&text[start..end]) {
-            transforms.insert(0, transform_cap[1].to_string());
+            let name = transform_cap[1].to_string();
             end -= transform_cap[0].len();
+            let mut args: Vec<String> = Vec::new();
+            if let Some(args_match) = transform_cap.get(2) {
+                args = sep_re.split(args_match.as_str()).into_iter().map(|s| s.to_string()).collect();
+            }
+            transforms.insert(0, (name, args));
         }
         Some(Expr {
             input: input_cap[1].to_string(),
@@ -201,21 +206,21 @@ impl Jsonatr {
                 }
             }?;
         }
-        for transform_name in expr.transforms {
-            if let Some(builtin) = self.builtins.get(&transform_name) {
-                match builtin(value) {
+        for transform in expr.transforms {
+            if let Some(builtin) = self.builtins.get(&transform.0) {
+                match builtin(value, &transform.1) {
                     Some(new_value) => value = new_value,
                     None => {
-                        eprintln!("Error: failed to apply builtin transform '{}'", transform_name);
+                        eprintln!("Error: failed to apply builtin transform '{}'", transform.0);
                         return None
                     }
                 }
             }
             else {
-                match self.apply_input(&transform_name, &value) {
+                match self.apply_input(&transform.0, &value) {
                     Ok(new_value) => value = new_value,
                     Err(e) => {
-                        eprintln!("Error: failed to apply input transform '{}'; reason: {}", transform_name, e.to_string());
+                        eprintln!("Error: failed to apply input transform '{}'; reason: {}", transform.0, e.to_string());
                         return None
                     }
                 }
