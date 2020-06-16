@@ -20,7 +20,7 @@ struct Expr {
     transforms: Vec<(String,Vec<String>)>
 }
 
-type Transforms = std::collections::HashMap<String, fn(Value, &Vec<String>) -> Option<Value>>;
+type Transforms = std::collections::HashMap<String, fn(&Jsonatr, Value, &Vec<String>) -> Option<Value>>;
 
 #[derive(Deserialize)]
 struct Jsonatr {
@@ -55,6 +55,7 @@ impl Jsonatr {
     fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
         let mut spec: Jsonatr = serde_json::from_str(spec)?;
         spec.builtins.insert("unwrap".to_string(),Jsonatr::builtin_unwrap);
+        spec.builtins.insert("map".to_string(),Jsonatr::builtin_map);
         for input in &spec.input {
             if spec.builtins.contains_key(&input.name) {
                 bail!("can't define input '{}' because of the builtin function with the same name", input.name)
@@ -68,13 +69,35 @@ impl Jsonatr {
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
-    fn builtin_unwrap(v: Value, _args: &Vec<String>) -> Option<Value> {
+    fn builtin_unwrap(&self, v: Value, _args: &Vec<String>) -> Option<Value> {
         let arr = v.as_array()?;
         match arr.len() {
             1 => Some(arr[0].clone()),
             _ => None
         }
     }
+
+    // assumes that the value is an array, and there is a single argument, which is an input name
+    fn builtin_map(&self, v: Value, args: &Vec<String>) -> Option<Value> {
+        let arr = v.as_array()?;
+        match args.len() {
+            1 => {
+                let new_arr: Vec<Value> = arr.iter().map(
+                    |x|
+                        match self.apply_input(&args[0], &x) {
+                            Ok(res) => res,
+                            Err(e) => {
+                                eprintln!("Error: failed to apply input transform '{}'; reason: {}", args[0], e.to_string());
+                                x.clone()
+                            }
+                        }
+                ).collect();
+                Some(Value::Array(new_arr))
+            },
+            _ => None
+        }
+    }
+
 
     // parses a Jsonatr expression, which is of the form
     // $<input>.<jsonpath> [| <transform>]*
@@ -208,7 +231,7 @@ impl Jsonatr {
         }
         for transform in expr.transforms {
             if let Some(builtin) = self.builtins.get(&transform.0) {
-                match builtin(value, &transform.1) {
+                match builtin(self, value, &transform.1) {
                     Some(new_value) => value = new_value,
                     None => {
                         eprintln!("Error: failed to apply builtin transform '{}'", transform.0);
