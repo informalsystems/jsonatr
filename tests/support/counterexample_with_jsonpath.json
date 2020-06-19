@@ -1,19 +1,37 @@
 {
   "description": "JsonPath queries to the Apalache counterexample. We are interested only in the last counterexample state",
+  "prerequisites": "add the directory with 'tendermint-rs/mbt-utils' binaries to your $PATH",
   "input": [
     {
       "name": "ce",
       "kind": "FILE",
       "source": "tests/support/counterexample.json"
+    },
+    {
+      "name": "last_state",
+      "kind": "INLINE",
+      "source": "$ce.declarations[-2]"
+    },
+    {
+      "name": "last_block",
+      "kind": "INLINE",
+      "source": "$last_state..[?(@.left == 'blockchain')].right[-1]"
+    },
+    {
+      "name": "last_commit",
+      "kind": "INLINE",
+      "source": "$last_block..[?(@.left.str == 'lastCommit')].right..str"
+    },
+    {
+      "name": "mbt_produce_validator",
+      "kind": "COMMAND",
+      "source": "mbt-tendermint-produce validator"
     }
   ],
   "output": {
-    "last-state": "ce.declarations[-2]",
-    "tooManyFaults": "$ce.declarations[-2]..[?(@.binary == '=' && @.left == 'tooManyFaults')].right",
-    "height": "$ce.declarations[-2]..[?(@.left == 'height')].right",
-    "verdict": "$ce.declarations[-2]..[?(@.left == 'outEvent')].right.record[?(@.left.str == 'verdict')].right",
-    "blockchain": "$ce.declarations[-2]..[?(@.left == 'blockchain')].right",
-    "last-block": "$ce.declarations[-2]..[?(@.left == 'blockchain')].right[-1]",
-    "last-block-lastCommit": "$ce.declarations[-2]..[?(@.left == 'blockchain')].right[-1]..[?(@.left.str == 'lastCommit')].right..str"
+    "tooManyFaults": "$last_state..[?(@.binary == '=' && @.left == 'tooManyFaults')].right",
+    "height": "$last_state..[?(@.left == 'height')].right",
+    "verdict": "$last_state..[?(@.left == 'outEvent')].right.record[?(@.left.str == 'verdict')].right",
+    "last-block-lastCommit-validators": "$last_commit |  map(mbt_produce_validator)"
   }
 }

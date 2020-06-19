@@ -160,7 +160,7 @@ impl Jsonatr {
                                 .stdin(Stdio::piped())
                                 .stdout(Stdio::piped())
                                 .spawn() {
-                                Err(_) => bail!("failed to run command for input '{}'", input.name),
+                                Err(e) => bail!("failed to run command for input '{}'; reason: {}", input.name, e.to_string()),
                                 Ok(process) => process,
                             };
 
