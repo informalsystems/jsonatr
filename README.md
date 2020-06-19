@@ -9,7 +9,7 @@ Our primary motivation for the tool comes from the need to perform model-based t
 * [Book Store](tests/support/store_with_jsonpath.json)
 * [Apalache counterexample](tests/support/counterexample_with_jsonpath.json)
 
-The planned features for *Jsonatr* include support for:
+The current *Jsonatr* features include support for:
 
 * direct embedding of JSON inputs into JSON output
 * JsonPath expressions for accessing components of JSON inputs
