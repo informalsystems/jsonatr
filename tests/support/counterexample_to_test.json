@@ -1,5 +1,5 @@
 {
-  "description": "JsonPath queries to the Apalache counterexample. We are interested only in the last counterexample state",
+  "description": "Specification for transforming an Apalache counterexample into a Tendermint test",
   "prerequisites": "add the directory with 'tendermint-rs/mbt-utils/mbt-tendermint-produce' to your $PATH",
   "input": [
     {
