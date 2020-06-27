@@ -1,0 +1,16 @@
+{
+  "tooManyFaults": [
+    true
+  ],
+  "height": [
+    3
+  ],
+  "verdict": [
+    true
+  ],
+  "last-block-lastCommit": [
+    "p1",
+    "p2",
+    "p3"
+  ]
+}

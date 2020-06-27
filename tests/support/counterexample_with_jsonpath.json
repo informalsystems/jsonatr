@@ -1,6 +1,5 @@
 {
   "description": "JsonPath queries to the Apalache counterexample. We are interested only in the last counterexample state",
-  "prerequisites": "add the directory with 'tendermint-rs/mbt-utils' binaries to your $PATH",
   "input": [
     {
       "name": "ce",
@@ -21,24 +20,12 @@
       "name": "last_commit",
       "kind": "INLINE",
       "source": "$last_block..[?(@.left.str == 'lastCommit')].right..str"
-    },
-    {
-      "name": "mbt_produce_validator",
-      "kind": "COMMAND",
-      "source": "mbt-tendermint-produce validator"
-    },
-    {
-      "name": "mbt_produce_header",
-      "kind": "COMMAND",
-      "source": "mbt-tendermint-produce header"
     }
   ],
   "output": {
     "tooManyFaults": "$last_state..[?(@.binary == '=' && @.left == 'tooManyFaults')].right",
     "height": "$last_state..[?(@.left == 'height')].right",
     "verdict": "$last_state..[?(@.left == 'outEvent')].right.record[?(@.left.str == 'verdict')].right",
-    "last-block-lastCommit": "$last_commit",
-    "last-block-lastCommit-validators": "$last_commit |  map(mbt_produce_validator)",
-    "last-block-lastCommit-header": "$last_commit |  map(mbt_produce_validator) | mbt_produce_header"
+    "last-block-lastCommit": "$last_commit"
   }
 }

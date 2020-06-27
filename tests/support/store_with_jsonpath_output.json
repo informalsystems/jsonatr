@@ -1,0 +1,269 @@
+{
+  "all-book-authors": [
+    "Nigel Rees",
+    "Evelyn Waugh",
+    "Herman Melville",
+    "J. R. R. Tolkien"
+  ],
+  "all-authors": [
+    "Nigel Rees",
+    "Evelyn Waugh",
+    "Herman Melville",
+    "J. R. R. Tolkien",
+    "Albert R. Broccoli and Harry Saltzman",
+    "Michael G. Wilson and Barbara Broccoli",
+    "Michael G. Wilson and Barbara Broccoli",
+    "Michael G. Wilson and Barbara Broccoli"
+  ],
+  "all-in-store": [
+    [
+      {
+        "category": "reference",
+        "author": "Nigel Rees",
+        "title": "Sayings of the Century",
+        "price": 8.95
+      },
+      {
+        "category": "fiction",
+        "author": "Evelyn Waugh",
+        "title": "Sword of Honour",
+        "price": 12.99
+      },
+      {
+        "category": "fiction",
+        "author": "Herman Melville",
+        "title": "Moby Dick",
+        "isbn": "0-553-21311-3",
+        "price": 8.99
+      },
+      {
+        "category": "fiction",
+        "author": "J. R. R. Tolkien",
+        "title": "The Lord of the Rings",
+        "isbn": "0-395-19395-8",
+        "price": 22.99
+      }
+    ],
+    [
+      {
+        "name": "Licence to Kill",
+        "author": "Albert R. Broccoli and Harry Saltzman",
+        "star": "Timothy Dalton",
+        "price": 5.99,
+        "rating": 5.6
+      },
+      {
+        "name": "GoldenEye",
+        "author": "Michael G. Wilson and Barbara Broccoli",
+        "star": "Pierce Brosnan",
+        "price": 6.99,
+        "rating": 7.2
+      },
+      {
+        "name": "Tomorrow Never Dies",
+        "author": "Michael G. Wilson and Barbara Broccoli",
+        "star": "Pierce Brosnan",
+        "price": 15.99,
+        "rating": 6.5
+      },
+      {
+        "name": "Skyfall",
+        "author": "Michael G. Wilson and Barbara Broccoli",
+        "star": "Daniel Craig",
+        "price": 22.99,
+        "rating": 8.5
+      }
+    ],
+    {
+      "color": "red",
+      "price": 19.95
+    }
+  ],
+  "all-prices": [
+    8.95,
+    12.99,
+    8.99,
+    22.99,
+    5.99,
+    6.99,
+    15.99,
+    22.99,
+    19.95
+  ],
+  "3rd-book": [
+    {
+      "category": "fiction",
+      "author": "Herman Melville",
+      "title": "Moby Dick",
+      "isbn": "0-553-21311-3",
+      "price": 8.99
+    }
+  ],
+  "last-book": [
+    {
+      "category": "fiction",
+      "author": "J. R. R. Tolkien",
+      "title": "The Lord of the Rings",
+      "isbn": "0-395-19395-8",
+      "price": 22.99
+    }
+  ],
+  "first-two-books": [
+    {
+      "category": "reference",
+      "author": "Nigel Rees",
+      "title": "Sayings of the Century",
+      "price": 8.95
+    },
+    {
+      "category": "fiction",
+      "author": "Evelyn Waugh",
+      "title": "Sword of Honour",
+      "price": 12.99
+    }
+  ],
+  "first-two-books-slice": [
+    {
+      "category": "reference",
+      "author": "Nigel Rees",
+      "title": "Sayings of the Century",
+      "price": 8.95
+    },
+    {
+      "category": "fiction",
+      "author": "Evelyn Waugh",
+      "title": "Sword of Honour",
+      "price": 12.99
+    }
+  ],
+  "books-with-isbn": [
+    {
+      "category": "fiction",
+      "author": "Herman Melville",
+      "title": "Moby Dick",
+      "isbn": "0-553-21311-3",
+      "price": 8.99
+    },
+    {
+      "category": "fiction",
+      "author": "J. R. R. Tolkien",
+      "title": "The Lord of the Rings",
+      "isbn": "0-395-19395-8",
+      "price": 22.99
+    }
+  ],
+  "cheap-books": [
+    {
+      "category": "reference",
+      "author": "Nigel Rees",
+      "title": "Sayings of the Century",
+      "price": 8.95
+    },
+    {
+      "category": "fiction",
+      "author": "Herman Melville",
+      "title": "Moby Dick",
+      "isbn": "0-553-21311-3",
+      "price": 8.99
+    }
+  ],
+  "cheap-movies": [
+    {
+      "name": "Licence to Kill",
+      "author": "Albert R. Broccoli and Harry Saltzman",
+      "star": "Timothy Dalton",
+      "price": 5.99,
+      "rating": 5.6
+    },
+    {
+      "name": "GoldenEye",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 6.99,
+      "rating": 7.2
+    }
+  ],
+  "all-cheap": [
+    {
+      "category": "reference",
+      "author": "Nigel Rees",
+      "title": "Sayings of the Century",
+      "price": 8.95
+    },
+    {
+      "category": "fiction",
+      "author": "Herman Melville",
+      "title": "Moby Dick",
+      "isbn": "0-553-21311-3",
+      "price": 8.99
+    },
+    {
+      "name": "Licence to Kill",
+      "author": "Albert R. Broccoli and Harry Saltzman",
+      "star": "Timothy Dalton",
+      "price": 5.99,
+      "rating": 5.6
+    },
+    {
+      "name": "GoldenEye",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 6.99,
+      "rating": 7.2
+    }
+  ],
+  "all-cheap-names-and-titles": [
+    "Sayings of the Century",
+    "Moby Dick",
+    "Licence to Kill",
+    "GoldenEye"
+  ],
+  "best-movies": [
+    {
+      "name": "GoldenEye",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 6.99,
+      "rating": 7.2
+    },
+    {
+      "name": "Tomorrow Never Dies",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 15.99,
+      "rating": 6.5
+    },
+    {
+      "name": "Skyfall",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Daniel Craig",
+      "price": 22.99,
+      "rating": 8.5
+    }
+  ],
+  "best-inexpensive-movies": [
+    {
+      "name": "GoldenEye",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 6.99,
+      "rating": 7.2
+    }
+  ],
+  "movies-with-brosnan": [
+    {
+      "name": "GoldenEye",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 6.99,
+      "rating": 7.2
+    },
+    {
+      "name": "Tomorrow Never Dies",
+      "author": "Michael G. Wilson and Barbara Broccoli",
+      "star": "Pierce Brosnan",
+      "price": 15.99,
+      "rating": 6.5
+    }
+  ]
+}
