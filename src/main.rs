@@ -13,6 +13,8 @@ use std::io::{Write, Read};
 
 #[macro_use]
 extern crate simple_error;
+#[macro_use]
+extern crate lazy_static;
 
 struct Expr {
     input: String,
@@ -49,6 +51,12 @@ pub struct Input {
 
     #[serde(default)]
     args: Vec<String>
+}
+
+lazy_static! {
+    static ref INPUT_RE: Regex = Regex::new(r"^\$([[:word:]]*)").unwrap();
+    static ref TRANSFORM_RE: Regex = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*(?:\([ \t]*([^)]*?)[ \t]*\))?[ \t]*$").unwrap();
+    static ref SEP_RE: Regex = Regex::new(r"[ \t]*,[ \t]*").unwrap();
 }
 
 impl Jsonatr {
@@ -98,7 +106,6 @@ impl Jsonatr {
         }
     }
 
-
     // parses a Jsonatr expression, which is of the form
     // $<input>.<jsonpath> [| <transform>]*
     //   <input> is an identifier, referring to an some of the inputs
@@ -106,20 +113,16 @@ impl Jsonatr {
     //   [| <transform> [(arg,...)]]* is a pipe-separated sequence of transforms,
     // each transform being an identifier with optional arguments
     fn parse_expr(&self, text: &str) -> Option<Expr> {
-        let input_re = Regex::new(r"^\$([[:word:]]*)").unwrap();
-        let transform_re = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*(?:\([ \t]*([^)]*?)[ \t]*\))?[ \t]*$").unwrap();
-        let sep_re = Regex::new(r"[ \t]*,[ \t]*").unwrap();
-
-        let input_cap = input_re.captures(text)?; // parsing fails if text doesn't contain input
+        let input_cap = INPUT_RE.captures(text)?; // parsing fails if text doesn't contain input
         let start = input_cap[0].len();
         let mut end = text.len();
         let mut transforms: Vec<(String,Vec<String>)> = Vec::new();
-        while let Some(transform_cap) = transform_re.captures(&text[start..end]) {
+        while let Some(transform_cap) = TRANSFORM_RE.captures(&text[start..end]) {
             let name = transform_cap[1].to_string();
             end -= transform_cap[0].len();
             let mut args: Vec<String> = Vec::new();
             if let Some(args_match) = transform_cap.get(2) {
-                args = sep_re.split(args_match.as_str()).into_iter().map(|s| s.to_string()).collect();
+                args = SEP_RE.split(args_match.as_str()).into_iter().map(|s| s.to_string()).collect();
             }
             transforms.insert(0, (name, args));
         }
