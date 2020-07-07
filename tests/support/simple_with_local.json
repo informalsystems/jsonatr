@@ -1,0 +1,37 @@
+{
+  "description": "Simple output with local values",
+  "input": [
+    {
+      "name": "timestamp",
+      "kind": "COMMAND",
+      "source": "date --utc +%FT%H:%M:%S.%NZ"
+    },
+    {
+      "name": "without_local",
+      "kind": "INLINE",
+      "source": {
+        "time1": "$timestamp",
+        "time2": "$timestamp"
+      }
+    },
+    {
+      "name": "with_local",
+      "kind": "INLINE",
+      "let": {
+        "timestamp": "$timestamp"
+      },
+      "source": {
+        "time1": "$timestamp",
+        "time2": "$timestamp"
+      }
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": 0.1,
+    "date": "$timestamp",
+    "stable": false,
+    "without_local": "$without_local",
+    "with_local": "$with_local"
+  }
+}

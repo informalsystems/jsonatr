@@ -22,7 +22,9 @@ struct Expr {
     transforms: Vec<(String,Vec<String>)>
 }
 
-type Transforms = std::collections::HashMap<String, fn(&Jsonatr, Value, &Vec<String>) -> Option<Value>>;
+type Locals = Vec<std::collections::HashMap<String, Value>>;
+type Builtin = fn(&mut Jsonatr, Value, &Vec<String>) -> Option<Value>;
+type Builtins = std::collections::HashMap<String, Builtin>;
 
 #[derive(Deserialize)]
 struct Jsonatr {
@@ -33,7 +35,10 @@ struct Jsonatr {
     inputs: std::collections::HashMap<String, Input>,
 
     #[serde(skip)]
-    builtins: Transforms
+    locals: Locals,
+
+    #[serde(skip)]
+    builtins: Builtins
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
@@ -47,6 +52,8 @@ enum InputKind {
 pub struct Input {
     name: String,
     kind: InputKind,
+    #[serde(rename = "let")]
+    lets: Option<Value>,
     source: Value,
 
     #[serde(default)]
@@ -71,13 +78,18 @@ impl Jsonatr {
             if spec.inputs.contains_key(&input.name) {
                 bail!("double definition of input '{}'", input.name)
             }
+            if let Some(l) = &input.lets {
+                if l.as_object().is_none() {
+                    bail!("wrong 'let' clause of input '{}': should be an object", input.name)
+                }
+            }
             spec.inputs.insert(input.name.clone(), input.clone());
         }
         Ok(spec)
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
-    fn builtin_unwrap(&self, v: Value, _args: &Vec<String>) -> Option<Value> {
+    fn builtin_unwrap(&mut self, v: Value, _args: &Vec<String>) -> Option<Value> {
         let arr = v.as_array()?;
         match arr.len() {
             1 => Some(arr[0].clone()),
@@ -86,7 +98,7 @@ impl Jsonatr {
     }
 
     // assumes that the value is an array, and there is a single argument, which is an input name
-    fn builtin_map(&self, v: Value, args: &Vec<String>) -> Option<Value> {
+    fn builtin_map(&mut self, v: Value, args: &Vec<String>) -> Option<Value> {
         let arr = v.as_array()?;
         match args.len() {
             1 => {
@@ -107,7 +119,7 @@ impl Jsonatr {
     }
 
     // parses a Jsonatr expression, which is of the form
-    // $<input>.<jsonpath> [| <transform>]*
+    // $<input>.<jsonpath>  [| <transform> [(arg,...)]]*
     //   <input> is an identifier, referring to an some of the inputs
     //   $.<jsonpath> is a JsonPath expression, interpreted by the jsonpath_lib
     //   [| <transform> [(arg,...)]]* is a pipe-separated sequence of transforms,
@@ -133,8 +145,25 @@ impl Jsonatr {
         })
     }
 
-    fn apply_input(&self, name: &String, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
-        let input = require_with!(self.inputs.get(name), "found reference to unknown input '{}'", name);
+    fn apply_input(&mut self, name: &String, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
+        // first try to find the reference in some local scope
+        for scope in self.locals.iter().rev() {
+            if scope.contains_key(name) {
+                return Ok(scope.get(name).unwrap().clone());
+            }
+        }
+        // if none is found, it should be present in the inputs
+        let input = require_with!(self.inputs.get(name), "found reference to unknown input '{}'", name).clone();
+        let lets: serde_json::Map<String, Value> =
+            match input.lets {
+                None => serde_json::Map::new(),
+                Some(lets) => require_with!(lets.as_object(),"let clause of input '{}' is not an object", name).clone()
+            };
+        let mut locals = std::collections::HashMap::new();
+        for (k, v) in lets {
+            locals.insert(k.clone(), self.transform_value(&v, root));
+        }
+        self.locals.push(locals);
         let result: Value;
         match input.kind {
             INLINE => {
@@ -194,15 +223,16 @@ impl Jsonatr {
                 }
             }
         };
+        self.locals.pop();
         Ok(result)
     }
 
-    fn transform(&self) -> Result<String, Error> {
-        let transformed_output = self.transform_value(&self.output, &Value::Null);
+    fn transform(&mut self) -> Result<String, Error> {
+        let transformed_output = self.transform_value(&self.output.clone(), &Value::Null);
         serde_json::to_string_pretty(&transformed_output)
     }
 
-    fn transform_string(&self, text: &String, root: &Value) -> Option<Value> {
+    fn transform_string(&mut self, text: &String, root: &Value) -> Option<Value> {
         //println!("transform text: {}", text);
         //println!("transform root: {}", root);
 
@@ -214,7 +244,10 @@ impl Jsonatr {
             }
             _ => match self.apply_input(&expr.input, root) {
                 Ok(v) => Some(v),
-                Err(_) => None
+                Err(e) => {
+                    eprintln!("Error: failed to apply transform; reason: {} ", e.to_string());
+                    None
+                }
             }
         }?;
         let mut value: Value;
@@ -255,7 +288,7 @@ impl Jsonatr {
         Some(value)
     }
 
-    fn transform_value(&self, v: &Value, input: &Value) -> Value {
+    fn transform_value(&mut self, v: &Value, input: &Value) -> Value {
         match v {
             Value::String(string) => {
                 if let Some(value) = self.transform_string(string, input) {
@@ -290,7 +323,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1);
     }
     let input = std::fs::read_to_string(&args[1])?;
-    let spec = Jsonatr::new(&input)?;
+    let mut spec = Jsonatr::new(&input)?;
     let res = spec.transform()?;
     println!("{}", res);
     Ok(())
@@ -307,7 +340,7 @@ mod tests {
     use crate::*;
     fn test_expect(file: &str, expect: &str) {
         let input = std::fs::read_to_string(file).unwrap();
-        let spec = Jsonatr::new(&input).unwrap();
+        let mut spec = Jsonatr::new(&input).unwrap();
         let res = spec.transform().unwrap();
         assert_eq!(res, expect)
     }
