@@ -223,7 +223,7 @@ impl Jsonatr {
                 }
             }
         };
-        self.locals.pop();
+        self.locals.pop(); // TODO: this should be done on all exit branches
         Ok(result)
     }
 

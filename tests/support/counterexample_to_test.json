@@ -25,7 +25,7 @@
     {
       "name": "blockchain",
       "kind": "INLINE",
-      "source": "$last_state..[?(@.left == 'blockchain')].right.tuple | unwrap"
+      "source": "$last_state..[?(@.left == 'blockchain')].right[\"@@\"]..[\":>\"][1].record"
     },
     {
       "name": "first_block",
@@ -126,7 +126,7 @@
       "now": "$now"
     },
     "input": "$blockchain[1:] | map(block_to_light_block)",
-    "expected_output_0": "$last_state..[?(@.left == 'outEvent')].right.record[?(@.left.str == 'verdict')].right | unwrap",
+    "expected_output_0": "$last_state..[?(@.left == 'state')].right.str | unwrap",
     "expected_output": "no error"
   }
 }
