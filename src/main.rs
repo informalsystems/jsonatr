@@ -104,7 +104,7 @@ impl Jsonatr {
             1 => {
                 let new_arr: Vec<Value> = arr.iter().map(
                     |x|
-                        match self.apply_input(&args[0], &x) {
+                        match self.apply_input_by_name(&args[0], &x) {
                             Ok(res) => res,
                             Err(e) => {
                                 eprintln!("Error: failed to apply input transform '{}'; reason: {}", args[0], e.to_string());
@@ -145,25 +145,7 @@ impl Jsonatr {
         })
     }
 
-    fn apply_input(&mut self, name: &String, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
-        // first try to find the reference in some local scope
-        for scope in self.locals.iter().rev() {
-            if scope.contains_key(name) {
-                return Ok(scope.get(name).unwrap().clone());
-            }
-        }
-        // if none is found, it should be present in the inputs
-        let input = require_with!(self.inputs.get(name), "found reference to unknown input '{}'", name).clone();
-        let lets: serde_json::Map<String, Value> =
-            match input.lets {
-                None => serde_json::Map::new(),
-                Some(lets) => require_with!(lets.as_object(),"let clause of input '{}' is not an object", name).clone()
-            };
-        let mut locals = std::collections::HashMap::new();
-        for (k, v) in lets {
-            locals.insert(k.clone(), self.transform_value(&v, root));
-        }
-        self.locals.push(locals);
+    fn apply_input(&mut self, input: &Input, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
         let result: Value;
         match input.kind {
             INLINE => {
@@ -223,8 +205,31 @@ impl Jsonatr {
                 }
             }
         };
-        self.locals.pop(); // TODO: this should be done on all exit branches
         Ok(result)
+    }
+
+    fn apply_input_by_name(&mut self, name: &String, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
+        // first try to find the reference in some local scope
+        for scope in self.locals.iter().rev() {
+            if scope.contains_key(name) {
+                return Ok(scope.get(name).unwrap().clone());
+            }
+        }
+        // if none is found, it should be present in the inputs
+        let input = require_with!(self.inputs.get(name), "found reference to unknown input '{}'", name).clone();
+        let lets: serde_json::Map<String, Value> =
+            match input.lets.clone() {
+                None => serde_json::Map::new(),
+                Some(lets) => require_with!(lets.as_object(),"let clause of input '{}' is not an object", name).clone()
+            };
+        let mut locals = std::collections::HashMap::new();
+        for (k, v) in lets {
+            locals.insert(k.clone(), self.transform_value(&v, root));
+        }
+        self.locals.push(locals);
+        let result = self.apply_input(&input, root);
+        self.locals.pop();
+        result
     }
 
     fn transform(&mut self) -> Result<String, Error> {
@@ -242,7 +247,7 @@ impl Jsonatr {
                 Value::Null => None,
                 x => Some(x.clone())
             }
-            _ => match self.apply_input(&expr.input, root) {
+            _ => match self.apply_input_by_name(&expr.input, root) {
                 Ok(v) => Some(v),
                 Err(e) => {
                     eprintln!("Error: failed to apply transform; reason: {} ", e.to_string());
@@ -276,7 +281,7 @@ impl Jsonatr {
                 }
             }
             else {
-                match self.apply_input(&transform.0, &value) {
+                match self.apply_input_by_name(&transform.0, &value) {
                     Ok(new_value) => value = new_value,
                     Err(e) => {
                         eprintln!("Error: failed to apply input transform '{}'; reason: {}", transform.0, e.to_string());
