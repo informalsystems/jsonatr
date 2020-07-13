@@ -10,8 +10,28 @@ extern crate lazy_static;
 
 use std::env;
 use std::process::{Command, Stdio};
-
+use gumdrop::Options;
 use jsonatr::Jsonatr;
+
+#[derive(Debug, Options)]
+struct CliOptions {
+    #[options(no_short, help = "print this help and exit")]
+    help: bool,
+    #[options(no_short, help = "provide detailed usage instructions")]
+    usage: bool,
+    #[options(no_short, help = "include input-output spec from FILE", meta="FILE")]
+    include: Vec<String>,
+    #[options(no_short, help = "read 'main' input from STDIN")]
+    stdin: bool,
+    #[options(no_short, long="in", help = "read 'main' input from FILE", meta="FILE")]
+    input: Option<String>,
+    #[options(no_short, long = "out", help = "write generated output into FILE instead of STDOUT", meta="FILE")]
+    output: Option<String>,
+    #[options(free, help = "provide output spec inline")]
+    output_spec: Option<String>
+}
+
+
 
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
@@ -27,6 +47,8 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn main() {
+    // let opts = CliOptions::parse_args_default_or_exit();
+    // println!("{:?}", opts);
     match run() {
         Ok(_) => (),
         Err(e) => println!("Error: {}", e)
