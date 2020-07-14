@@ -1,10 +1,9 @@
 use serde::Deserialize;
-use serde_json::Error;
 use serde_json::Value;
 
 use std::process::{Command, Stdio};
 use regex::Regex;
-
+use simple_error::*;
 use std::io::{Write, Read};
 
 struct Expr {
@@ -20,7 +19,7 @@ type Builtins = std::collections::HashMap<String, Builtin>;
 #[derive(Deserialize)]
 pub struct Jsonatr {
     input: Vec<Input>,
-    output: Value,
+    output: Option<Value>,
 
     #[serde(skip)]
     inputs: std::collections::HashMap<String, Input>,
@@ -58,25 +57,65 @@ lazy_static! {
 }
 
 impl Jsonatr {
-    pub fn new(spec: &str) -> Result<Jsonatr, Box<dyn std::error::Error>> {
-        let mut spec: Jsonatr = serde_json::from_str(spec)?;
-        spec.builtins.insert("unwrap".to_string(),Jsonatr::builtin_unwrap);
-        spec.builtins.insert("map".to_string(),Jsonatr::builtin_map);
-        for input in &spec.input {
-            if spec.builtins.contains_key(&input.name) {
-                bail!("can't define input '{}' because of the builtin function with the same name", input.name)
-            }
-            if spec.inputs.contains_key(&input.name) {
-                bail!("double definition of input '{}'", input.name)
-            }
-            if let Some(l) = &input.lets {
-                if l.as_object().is_none() {
-                    bail!("wrong 'let' clause of input '{}': should be an object", input.name)
-                }
-            }
-            spec.inputs.insert(input.name.clone(), input.clone());
+
+    pub fn empty() -> Jsonatr {
+        let mut spec = Jsonatr {
+            input: vec![],
+            output: None,
+            inputs: Default::default(),
+            locals: vec![],
+            builtins: Default::default()
+        };
+        spec.add_builtins();
+        spec
+    }
+
+    pub fn new(spec: &str) -> Result<Jsonatr, SimpleError> {
+        let mut spec: Jsonatr = try_with!(serde_json::from_str(spec),"failed to parse JSON");
+        spec.add_builtins();
+        for input in spec.input.clone() {
+            spec.add_input(input)?;
         }
         Ok(spec)
+    }
+
+    pub fn merge(&mut self, other: &Jsonatr) -> Result<(), SimpleError> {
+        if other.output.is_some() {
+            self.add_output(other.output.as_ref().unwrap().clone())?
+        }
+        for input in other.input.clone() {
+            self.add_input(input)?;
+        }
+        Ok(())
+    }
+
+    pub fn add_input(&mut self, input: Input) -> Result<(), SimpleError> {
+        if self.builtins.contains_key(&input.name) {
+            bail!("can't define input '{}' because of the builtin function with the same name", input.name)
+        }
+        if self.inputs.contains_key(&input.name) {
+            bail!("double definition of input '{}'", input.name)
+        }
+        if let Some(l) = &input.lets {
+            if l.as_object().is_none() {
+                bail!("wrong 'let' clause of input '{}': should be an object", input.name)
+            }
+        }
+        self.inputs.insert(input.name.clone(), input);
+        Ok(())
+    }
+
+    pub fn add_output(&mut self, output: Value) -> Result<(), SimpleError> {
+        if self.output.is_some() {
+            bail!("double definition of output")
+        }
+        self.output = Some(output);
+        Ok(())
+    }
+
+    fn add_builtins(&mut self)  {
+        self.builtins.insert("unwrap".to_string(),Jsonatr::builtin_unwrap);
+        self.builtins.insert("map".to_string(),Jsonatr::builtin_map);
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
@@ -223,9 +262,11 @@ impl Jsonatr {
         result
     }
 
-    pub fn transform(&mut self) -> Result<String, Error> {
-        let transformed_output = self.transform_value(&self.output.clone(), &Value::Null);
-        serde_json::to_string_pretty(&transformed_output)
+    pub fn transform(&mut self, input: &Value) -> Result<String, SimpleError> {
+        let output = require_with!(self.output.clone(), "no output specified");
+        let transformed_output = self.transform_value(&output, input);
+        let result = try_with!(serde_json::to_string_pretty(&transformed_output), "failed to produce output");
+        Ok(result)
     }
 
     fn transform_string(&mut self, text: &String, root: &Value) -> Option<Value> {

@@ -3,15 +3,16 @@ mod jsonatr;
 extern crate jsonpath_lib as jsonpath;
 extern crate shell_words;
 
-#[macro_use]
 extern crate simple_error;
 #[macro_use]
 extern crate lazy_static;
 
-use std::env;
-use std::process::{Command, Stdio};
+use std::process::{Command};
 use gumdrop::Options;
 use jsonatr::Jsonatr;
+use serde_json::Value;
+use std::io::{self, Read};
+use simple_error::*;
 
 #[derive(Debug, Options)]
 struct CliOptions {
@@ -19,11 +20,11 @@ struct CliOptions {
     help: bool,
     #[options(no_short, help = "provide detailed usage instructions")]
     usage: bool,
-    #[options(no_short, help = "include input-output spec from FILE", meta="FILE")]
+    #[options(long="use", no_short, help = "include input-output spec from FILE", meta="FILE")]
     include: Vec<String>,
-    #[options(no_short, help = "read 'main' input from STDIN")]
+    #[options(no_short, help = "read main input from STDIN")]
     stdin: bool,
-    #[options(no_short, long="in", help = "read 'main' input from FILE", meta="FILE")]
+    #[options(no_short, long="in", help = "read main input from FILE", meta="FILE")]
     input: Option<String>,
     #[options(no_short, long = "out", help = "write generated output into FILE instead of STDOUT", meta="FILE")]
     output: Option<String>,
@@ -31,24 +32,70 @@ struct CliOptions {
     output_spec: Option<String>
 }
 
+fn read_file(path: &str) -> Result<String, SimpleError> {
+    let file = try_with!(std::fs::read_to_string(path), "failed to read file");
+    Ok(file)
+}
 
+fn parse_string(string: &str) -> Result<Value, SimpleError> {
+    let value: Value = try_with!(serde_json::from_str(&string), "failed to parse JSON");
+    Ok(value)
+}
 
-fn run() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = env::args().collect();
-    if args.len() != 2 {
-        eprintln!("Error: expecting JSON transformation spec");
-        std::process::exit(1);
+fn parse_file(path: &str) -> Result<Value, SimpleError> {
+    let file = read_file(path)?;
+    let value = parse_string(&file)?;
+    Ok(value)
+}
+
+fn parse_stdin() -> Result<Value, SimpleError> {
+    let mut buffer = String::new();
+    try_with!(io::stdin().read_to_string(&mut buffer), "failed to read from STDIN");
+    let value = parse_string(&buffer)?;
+    Ok(value)
+}
+
+fn run() -> Result<(), SimpleError> {
+    let opts = CliOptions::parse_args_default_or_exit();
+    if opts.stdin  && opts.input.is_some() {
+        bail!("both --stdin and --input are given, but only one main input can be accepted")
     }
-    let input = std::fs::read_to_string(&args[1])?;
-    let mut spec = Jsonatr::new(&input)?;
-    let res = spec.transform()?;
-    println!("{}", res);
+
+    let mut spec = Jsonatr::empty();
+    for include in opts.include {
+        let file = read_file(&include)?;
+        let other = Jsonatr::new(&file)?;
+        spec.merge(&other)?;
+    }
+
+    if let Some(output_spec) = opts.output_spec {
+        let output = parse_string(&output_spec)?;
+        spec.add_output(output)?
+    }
+
+    // The 'main' input, i.e. the one that can be addressed in the output spec with unnamed $
+    let main: Value;
+    if opts.stdin {
+        main = parse_stdin()?
+    }
+    else if let Some(input) = opts.input {
+        main = parse_file(&input)?
+    }
+    else {
+        main = Value::Null;
+    }
+
+    let res = spec.transform(&main)?;
+    if let Some(path) = opts.output {
+        try_with!(std::fs::write(path, res), "failed to write output")
+    }
+    else {
+        println!("{}", res);
+    }
     Ok(())
 }
 
 fn main() {
-    // let opts = CliOptions::parse_args_default_or_exit();
-    // println!("{:?}", opts);
     match run() {
         Ok(_) => (),
         Err(e) => println!("Error: {}", e)
@@ -60,7 +107,7 @@ mod tests {
     fn test_expect(file: &str, expect: &str) {
         let input = std::fs::read_to_string(file).unwrap();
         let mut spec = Jsonatr::new(&input).unwrap();
-        let res = spec.transform().unwrap();
+        let res = spec.transform(&Value::Null).unwrap();
         assert_eq!(res, expect)
     }
 
