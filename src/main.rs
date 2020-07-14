@@ -1,4 +1,5 @@
 mod jsonatr;
+mod helpers;
 
 extern crate jsonpath_lib as jsonpath;
 extern crate shell_words;
@@ -11,8 +12,8 @@ use std::process::{Command};
 use gumdrop::Options;
 use jsonatr::Jsonatr;
 use serde_json::Value;
-use std::io::{self, Read};
 use simple_error::*;
+use crate::helpers::*;
 
 #[derive(Debug, Options)]
 struct CliOptions {
@@ -32,28 +33,6 @@ struct CliOptions {
     output_spec: Option<String>
 }
 
-fn read_file(path: &str) -> Result<String, SimpleError> {
-    let file = try_with!(std::fs::read_to_string(path), "failed to read file");
-    Ok(file)
-}
-
-fn parse_string(string: &str) -> Result<Value, SimpleError> {
-    let value: Value = try_with!(serde_json::from_str(&string), "failed to parse JSON");
-    Ok(value)
-}
-
-fn parse_file(path: &str) -> Result<Value, SimpleError> {
-    let file = read_file(path)?;
-    let value = parse_string(&file)?;
-    Ok(value)
-}
-
-fn parse_stdin() -> Result<Value, SimpleError> {
-    let mut buffer = String::new();
-    try_with!(io::stdin().read_to_string(&mut buffer), "failed to read from STDIN");
-    let value = parse_string(&buffer)?;
-    Ok(value)
-}
 
 fn run() -> Result<(), SimpleError> {
     let opts = CliOptions::parse_args_default_or_exit();
