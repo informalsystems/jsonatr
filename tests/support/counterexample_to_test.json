@@ -115,6 +115,16 @@
         "validator_set": "$ | VS | ids_to_validator_set",
         "next_validator_set": "$ | NextVS | ids_to_validator_set"
       }
+    },
+    {
+      "name": "noerror",
+      "kind": "INLINE",
+      "source": "no error"
+    },
+    {
+      "name": "error",
+      "kind": "INLINE",
+      "source": "error"
     }
   ],
   "output": {
@@ -126,7 +136,6 @@
       "now": "$now"
     },
     "input": "$blockchain[1:] | map(block_to_light_block)",
-    "expected_output_0": "$last_state..[?(@.left == 'state')].right.str | unwrap",
-    "expected_output": "no error"
+    "expected_output": "$last_state..[?(@.left == 'state')]..[?(@ == 'finishedSuccess')] | ifelse(noerror, error)"
   }
 }

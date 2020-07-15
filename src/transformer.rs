@@ -127,6 +127,7 @@ impl Transformer {
     fn add_builtins(&mut self)  {
         self.builtins.insert("unwrap".to_string(), Transformer::builtin_unwrap);
         self.builtins.insert("map".to_string(), Transformer::builtin_map);
+        self.builtins.insert("ifelse".to_string(), Transformer::builtin_ifelse);
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
@@ -156,6 +157,35 @@ impl Transformer {
                 Some(Value::Array(new_arr))
             },
             _ => None
+        }
+    }
+
+    // checks the value for non-emptiness/non-zeroness,
+    // and assumes that there are two arguments: if_branch and else_branch transformers
+    fn builtin_ifelse(&mut self, v: Value, args: &Vec<String>) -> Option<Value> {
+        if args.len() != 2 {
+            return None
+        }
+        let cond = match v.clone() {
+            Value::Null => false,
+            Value::Bool(x) => x,
+            Value::Number(x) => {
+                if let Some(n) = x.as_f64() { n != 0f64 }
+                else if let Some(n) = x.as_i64() { n != 0i64 }
+                else if let Some(n) = x.as_u64() { n != 0u64 }
+                else { return None }
+            },
+            Value::Array(x) => !x.is_empty(),
+            Value::String(x) => !x.is_empty(),
+            Value::Object(x) => !x.is_empty()
+        };
+        let index = if cond { 0 } else { 1 };
+        match self.apply_input_by_name(&args[index], &v) {
+            Ok(res) => Some(res),
+            Err(e) => {
+                eprintln!("Error: failed to apply input transform '{}'; reason: {}", args[index], e.to_string());
+                None
+            }
         }
     }
 
