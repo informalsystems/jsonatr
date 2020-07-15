@@ -101,18 +101,20 @@ impl Transformer {
                 bail!("non-string provided as source for include input '{}'", input.name)
             }
         }
-        if self.builtins.contains_key(&input.name) {
-            bail!("can't define input '{}' because of the builtin function with the same name", input.name)
-        }
-        if self.inputs.contains_key(&input.name) {
-            bail!("double definition of input '{}'", input.name)
-        }
-        if let Some(l) = &input.lets {
-            if l.as_object().is_none() {
-                bail!("wrong 'let' clause of input '{}': should be an object", input.name)
+        else { // any other input should not conflict with the present names
+            if self.builtins.contains_key(&input.name) {
+                bail!("can't define input '{}' because of the builtin function with the same name", input.name)
             }
+            if self.inputs.contains_key(&input.name) {
+                bail!("double definition of input '{}'", input.name)
+            }
+            if let Some(l) = &input.lets {
+                if l.as_object().is_none() {
+                    bail!("wrong 'let' clause of input '{}': should be an object", input.name)
+                }
+            }
+            self.inputs.insert(input.name.clone(), input);
         }
-        self.inputs.insert(input.name.clone(), input);
         Ok(())
     }
 
