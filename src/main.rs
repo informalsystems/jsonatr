@@ -1,19 +1,9 @@
-mod jsonatr;
-mod helpers;
+use jsonatr::helpers::*;
+use jsonatr::transformer::*;
 
-extern crate jsonpath_lib as jsonpath;
-extern crate shell_words;
-
-extern crate simple_error;
-#[macro_use]
-extern crate lazy_static;
-
-use std::process::{Command};
 use gumdrop::Options;
-use jsonatr::Jsonatr;
 use serde_json::Value;
 use simple_error::*;
-use crate::helpers::*;
 
 #[derive(Debug, Options)]
 struct CliOptions {
@@ -40,10 +30,10 @@ fn run() -> Result<(), SimpleError> {
         bail!("both --stdin and --input are given, but only one main input can be accepted")
     }
 
-    let mut spec = Jsonatr::empty();
+    let mut spec = Transformer::empty();
     for include in opts.include {
         let file = read_file(&include)?;
-        let other = Jsonatr::new(&file)?;
+        let other = Transformer::new(&file)?;
         spec.merge(&other)?;
     }
 
@@ -78,57 +68,5 @@ fn main() {
     match run() {
         Ok(_) => (),
         Err(e) => println!("Error: {}", e)
-    }
-}
-
-mod tests {
-    use crate::*;
-    fn test_expect(file: &str, expect: &str) {
-        let input = std::fs::read_to_string(file).unwrap();
-        let mut spec = Jsonatr::new(&input).unwrap();
-        let res = spec.transform(&Value::Null).unwrap();
-        assert_eq!(res, expect)
-    }
-
-    #[test]
-    fn test_simple()  {
-        test_expect("tests/support/simple.json",r#"{
-  "tool": "jsonatr",
-  "version": 0.1,
-  "stable": false,
-  "features": [
-    "read",
-    "write"
-  ]
-}"#);
-    }
-
-    #[test]
-    fn test_simple_with_version()  {
-        test_expect("tests/support/simple_with_version.json",r#"{
-  "tool": "jsonatr",
-  "version": "0.1",
-  "stable": false,
-  "features": [
-    "read",
-    "write"
-  ]
-}"#);
-    }
-
-    #[test]
-    fn test_simple_with_command()  {
-        let output = Command::new("date").args(&["-I"]).output().unwrap();
-        let date = serde_json::Value::String(String::from_utf8_lossy(&output.stdout).trim_end().to_string());
-        test_expect("tests/support/simple_with_command.json",&format!(r#"{{
-  "tool": "jsonatr",
-  "version": 0.1,
-  "date": {},
-  "stable": false,
-  "features": [
-    "read",
-    "write"
-  ]
-}}"#, date));
     }
 }

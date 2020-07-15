@@ -13,11 +13,11 @@ struct Expr {
 }
 
 type Locals = Vec<std::collections::HashMap<String, Value>>;
-type Builtin = fn(&mut Jsonatr, Value, &Vec<String>) -> Option<Value>;
+type Builtin = fn(&mut Transformer, Value, &Vec<String>) -> Option<Value>;
 type Builtins = std::collections::HashMap<String, Builtin>;
 
 #[derive(Deserialize)]
-pub struct Jsonatr {
+pub struct Transformer {
     input: Vec<Input>,
     output: Option<Value>,
 
@@ -33,8 +33,9 @@ pub struct Jsonatr {
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 enum InputKind {
+    USE,    // use inputs defined in another transformation spec
     INLINE, // inline JSON
-    FILE, // external JSON file
+    FILE,   // external JSON file
     COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
 }
 
@@ -56,10 +57,10 @@ lazy_static! {
     static ref SEP_RE: Regex = Regex::new(r"[ \t]*,[ \t]*").unwrap();
 }
 
-impl Jsonatr {
+impl Transformer {
 
-    pub fn empty() -> Jsonatr {
-        let mut spec = Jsonatr {
+    pub fn empty() -> Transformer {
+        let mut spec = Transformer {
             input: vec![],
             output: None,
             inputs: Default::default(),
@@ -70,8 +71,8 @@ impl Jsonatr {
         spec
     }
 
-    pub fn new(spec: &str) -> Result<Jsonatr, SimpleError> {
-        let mut spec: Jsonatr = try_with!(serde_json::from_str(spec),"failed to parse JSON");
+    pub fn new(spec: &str) -> Result<Transformer, SimpleError> {
+        let mut spec: Transformer = try_with!(serde_json::from_str(spec),"failed to parse JSON");
         spec.add_builtins();
         for input in spec.input.clone() {
             spec.add_input(input)?;
@@ -79,7 +80,7 @@ impl Jsonatr {
         Ok(spec)
     }
 
-    pub fn merge(&mut self, other: &Jsonatr) -> Result<(), SimpleError> {
+    pub fn merge(&mut self, other: &Transformer) -> Result<(), SimpleError> {
         if other.output.is_some() {
             self.add_output(other.output.as_ref().unwrap().clone())?
         }
@@ -90,6 +91,9 @@ impl Jsonatr {
     }
 
     pub fn add_input(&mut self, input: Input) -> Result<(), SimpleError> {
+        if input.kind == InputKind::USE {
+
+        }
         if self.builtins.contains_key(&input.name) {
             bail!("can't define input '{}' because of the builtin function with the same name", input.name)
         }
@@ -114,8 +118,8 @@ impl Jsonatr {
     }
 
     fn add_builtins(&mut self)  {
-        self.builtins.insert("unwrap".to_string(),Jsonatr::builtin_unwrap);
-        self.builtins.insert("map".to_string(),Jsonatr::builtin_map);
+        self.builtins.insert("unwrap".to_string(), Transformer::builtin_unwrap);
+        self.builtins.insert("map".to_string(), Transformer::builtin_map);
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
@@ -178,6 +182,9 @@ impl Jsonatr {
     fn apply_input(&mut self, input: &Input, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
         let result: Value;
         match input.kind {
+            InputKind::USE => {
+                bail!("unexpected 'use' reference found");
+            },
             InputKind::INLINE => {
                 result = self.transform_value(&input.source, root);
             },
