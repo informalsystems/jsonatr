@@ -1,0 +1,17 @@
+{
+  "description": "Simple output with external version",
+  "input": [
+    {
+      "name": "commands",
+      "kind": "USE",
+      "source": "tests/support/commands.json"
+    }
+  ],
+  "output": {
+    "tool": "jsonatr",
+    "version": 0.1,
+    "date": "$date",
+    "stable": false,
+    "features": ["read", "write"]
+  }
+}

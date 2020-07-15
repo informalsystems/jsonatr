@@ -1,0 +1,10 @@
+{
+  "description": "Useful external commands",
+  "input": [
+    {
+      "name": "date",
+      "kind": "COMMAND",
+      "source": "date -I"
+    }
+  ]
+}

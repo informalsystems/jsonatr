@@ -1,6 +1,6 @@
+use crate::helpers::*;
 use serde::Deserialize;
 use serde_json::Value;
-
 use std::process::{Command, Stdio};
 use regex::Regex;
 use simple_error::*;
@@ -92,7 +92,14 @@ impl Transformer {
 
     pub fn add_input(&mut self, input: Input) -> Result<(), SimpleError> {
         if input.kind == InputKind::USE {
-
+            if let Some(path) = input.source.as_str() {
+                let file = read_file(path)?;
+                let other = Transformer::new(&file)?;
+                self.merge(&other)?;
+            }
+            else {
+                bail!("non-string provided as source for include input '{}'", input.name)
+            }
         }
         if self.builtins.contains_key(&input.name) {
             bail!("can't define input '{}' because of the builtin function with the same name", input.name)
