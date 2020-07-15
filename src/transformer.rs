@@ -18,7 +18,10 @@ type Builtins = std::collections::HashMap<String, Builtin>;
 
 #[derive(Deserialize)]
 pub struct Transformer {
-    input: Vec<Input>,
+    #[serde(rename = "use")]
+    uses: Option<Vec<String>>,
+
+    input: Option<Vec<Input>>,
     output: Option<Value>,
 
     #[serde(skip)]
@@ -33,7 +36,6 @@ pub struct Transformer {
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 enum InputKind {
-    USE,    // use inputs defined in another transformation spec
     INLINE, // inline JSON
     FILE,   // external JSON file
     COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
@@ -61,7 +63,8 @@ impl Transformer {
 
     pub fn empty() -> Transformer {
         let mut spec = Transformer {
-            input: vec![],
+            uses: None,
+            input: None,
             output: None,
             inputs: Default::default(),
             locals: vec![],
@@ -74,8 +77,15 @@ impl Transformer {
     pub fn new(spec: &str) -> Result<Transformer, SimpleError> {
         let mut spec: Transformer = try_with!(serde_json::from_str(spec),"failed to parse JSON");
         spec.add_builtins();
-        for input in spec.input.clone() {
-            spec.add_input(input)?;
+        if let Some(uses) = spec.uses.clone() {
+            for path in uses {
+                spec.add_use(path)?;
+            }
+        }
+        if let Some(inputs) = spec.input.clone() {
+            for input in inputs {
+                spec.add_input(input)?;
+            }
         }
         Ok(spec)
     }
@@ -84,37 +94,32 @@ impl Transformer {
         if other.output.is_some() {
             self.add_output(other.output.as_ref().unwrap().clone())?
         }
-        for input in other.input.clone() {
-            self.add_input(input)?;
+        for input in other.inputs.values() {
+            self.add_input(input.clone())?;
         }
         Ok(())
     }
 
+    pub fn add_use(&mut self, path: String) -> Result<(), SimpleError> {
+        let file = read_file(&path)?;
+        let other = Transformer::new(&file)?;
+        self.merge(&other)?;
+        Ok(())
+    }
+
     pub fn add_input(&mut self, input: Input) -> Result<(), SimpleError> {
-        if input.kind == InputKind::USE {
-            if let Some(path) = input.source.as_str() {
-                let file = read_file(path)?;
-                let other = Transformer::new(&file)?;
-                self.merge(&other)?;
-            }
-            else {
-                bail!("non-string provided as source for include input '{}'", input.name)
+        if self.builtins.contains_key(&input.name) {
+            bail!("can't define input '{}' because of the builtin function with the same name", input.name)
+        }
+        if self.inputs.contains_key(&input.name) {
+            bail!("double definition of input '{}'", input.name)
+        }
+        if let Some(l) = &input.lets {
+            if l.as_object().is_none() {
+                bail!("wrong 'let' clause of input '{}': should be an object", input.name)
             }
         }
-        else { // any other input should not conflict with the present names
-            if self.builtins.contains_key(&input.name) {
-                bail!("can't define input '{}' because of the builtin function with the same name", input.name)
-            }
-            if self.inputs.contains_key(&input.name) {
-                bail!("double definition of input '{}'", input.name)
-            }
-            if let Some(l) = &input.lets {
-                if l.as_object().is_none() {
-                    bail!("wrong 'let' clause of input '{}': should be an object", input.name)
-                }
-            }
-            self.inputs.insert(input.name.clone(), input);
-        }
+        self.inputs.insert(input.name.clone(), input);
         Ok(())
     }
 
@@ -221,9 +226,6 @@ impl Transformer {
     fn apply_input(&mut self, input: &Input, root: &Value) -> Result<Value, Box<dyn std::error::Error>> {
         let result: Value;
         match input.kind {
-            InputKind::USE => {
-                bail!("unexpected 'use' reference found");
-            },
             InputKind::INLINE => {
                 result = self.transform_value(&input.source, root);
             },

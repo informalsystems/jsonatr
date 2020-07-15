@@ -31,10 +31,8 @@ fn run() -> Result<(), SimpleError> {
     }
 
     let mut spec = Transformer::empty();
-    for include in opts.include {
-        let file = read_file(&include)?;
-        let other = Transformer::new(&file)?;
-        spec.merge(&other)?;
+    for path in opts.include {
+        spec.add_use(path)?
     }
 
     if let Some(output_spec) = opts.output_spec {

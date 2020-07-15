@@ -1,11 +1,7 @@
 {
-  "description": "Simple output with external version",
-  "input": [
-    {
-      "name": "commands",
-      "kind": "USE",
-      "source": "tests/support/commands.json"
-    }
+  "description": "Simple output with using a transformer from another file",
+  "use": [
+    "tests/support/commands.json"
   ],
   "output": {
     "tool": "jsonatr",
