@@ -1,0 +1,20 @@
+{
+  "description": "Useful external commands",
+  "input": [
+    {
+      "name": "date",
+      "kind": "COMMAND",
+      "source": "date -I"
+    },
+    {
+      "name": "utc_timestamp",
+      "kind": "COMMAND",
+      "source": "date --utc +%FT%H:%M:%S.%NZ"
+    },
+    {
+      "name": "utc_timestamp_hour_ago",
+      "kind": "COMMAND",
+      "source": "date --utc +%FT%H:%M:%S.%NZ --date '-1 hour'"
+    }
+  ]
+}
