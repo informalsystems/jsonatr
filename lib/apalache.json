@@ -1,0 +1,36 @@
+{
+  "description": "Transformers for the analysis of Apalache counterexamples",
+  "input": [
+    {
+      "name": "first_state",
+      "kind": "INLINE",
+      "source": "$.declarations[1].body.and | unwrap"
+    },
+    {
+      "name": "last_state",
+      "kind": "INLINE",
+      "source": "$.declarations[-2].body.and | unwrap"
+    },
+    {
+      "name": "last_blockchain",
+      "kind": "INLINE",
+      "source": "$last_state..[?(@.eq == 'blockchain')]..arg.atat..arg.record"
+    },
+    {
+      "name": "VS",
+      "kind": "INLINE",
+      "source": "$..[?(@.key.str == 'VS')].value..str"
+    },
+    {
+      "name": "NextVS",
+      "kind": "INLINE",
+      "source": "$..[?(@.key.str == 'NextVS')].value..str"
+    },
+
+    {
+      "name": "height",
+      "kind": "INLINE",
+      "source": "$..[?(@.key.str == 'height')].value | unwrap"
+    }
+  ]
+}
