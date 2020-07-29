@@ -6,10 +6,40 @@ use regex::Regex;
 use simple_error::*;
 use std::io::{Write, Read};
 
+#[derive(Debug, Deserialize, PartialEq, Clone)]
+enum InputKind {
+    INLINE, // inline JSON
+    FILE,   // external JSON file
+    COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Input {
+    name: String,
+    kind: InputKind,
+    #[serde(rename = "let")]
+    lets: Option<Value>,
+    source: Value,
+    #[serde(default="Input::pass_stdin")]
+    stdin: bool,
+    #[serde(default)]
+    args: Vec<String>
+}
+
+impl Input {
+    pub fn pass_stdin() -> bool { true }
+}
+
 struct Expr {
     input: String,
     jpath: String,
     transforms: Vec<(String,Vec<String>)>
+}
+
+lazy_static! {
+    static ref INPUT_RE: Regex = Regex::new(r"^\$([[:word:]]*)").unwrap();
+    static ref TRANSFORM_RE: Regex = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*(?:\([ \t]*([^)]*?)[ \t]*\))?[ \t]*$").unwrap();
+    static ref SEP_RE: Regex = Regex::new(r"[ \t]*,[ \t]*").unwrap();
 }
 
 type Locals = Vec<std::collections::HashMap<String, Value>>;
@@ -34,33 +64,7 @@ pub struct Transformer {
     builtins: Builtins
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
-enum InputKind {
-    INLINE, // inline JSON
-    FILE,   // external JSON file
-    COMMAND // external command; its output should either be a valid JSON, or otherwise is converted to a JSON string
-}
-
-#[derive(Debug, Deserialize, Clone)]
-pub struct Input {
-    name: String,
-    kind: InputKind,
-    #[serde(rename = "let")]
-    lets: Option<Value>,
-    source: Value,
-
-    #[serde(default)]
-    args: Vec<String>
-}
-
-lazy_static! {
-    static ref INPUT_RE: Regex = Regex::new(r"^\$([[:word:]]*)").unwrap();
-    static ref TRANSFORM_RE: Regex = Regex::new(r"[ \t]*\|[ \t]*([[:word:]]+)[ \t]*(?:\([ \t]*([^)]*?)[ \t]*\))?[ \t]*$").unwrap();
-    static ref SEP_RE: Regex = Regex::new(r"[ \t]*,[ \t]*").unwrap();
-}
-
 impl Transformer {
-
     pub fn empty() -> Transformer {
         let mut spec = Transformer {
             uses: None,
@@ -255,10 +259,11 @@ impl Transformer {
                                 Err(e) => bail!("failed to run command for input '{}'; reason: {}", input.name, e.to_string()),
                                 Ok(process) => process,
                             };
-
-                            match &process.stdin.as_mut().unwrap().write(serde_json::to_string(root).unwrap().as_bytes()) {
-                                Err(_) => bail!("couldn't write to command stdin for input '{}'", input.name),
-                                Ok(_) => (),
+                            if input.stdin {
+                                match &process.stdin.as_mut().unwrap().write(serde_json::to_string(root).unwrap().as_bytes()) {
+                                    Err(_) => bail!("couldn't write to command stdin for input '{}'", input.name),
+                                    Ok(_) => (),
+                                }
                             }
                             let status = process.wait()?;
                             if !status.success() {
