@@ -1,0 +1,49 @@
+{
+  "description": "Transform an Apalache counterexample into a Tendermint LightClient test",
+  "use": [
+    "lib/unix.json",
+    "lib/apalache-tendermint.json"
+  ],
+  "input": [
+    {
+      "name": "block_to_initial_block",
+      "description": "transforms a block from Apalache CE into a JSON-encoded Tendermint initial light block",
+      "kind": "INLINE",
+      "source": {
+        "signed_header": "$ | block_to_signed_header",
+        "next_validator_set": "$ | block_next_validators | ids_to_validator_set",
+        "trusting_period": "10800000000000",
+        "now": "$utc_timestamp"
+      }
+    },
+    {
+      "name": "block_to_light_block",
+      "description": "transforms a block from Apalache CE into a JSON-encoded Tendermint light block",
+      "kind": "INLINE",
+      "let": {
+        "utc_timestamp": "$utc_timestamp_hour_ago"
+      },
+      "source": {
+        "signed_header": "$ | block_to_signed_header",
+        "validator_set": "$ | block_validators | ids_to_validator_set",
+        "next_validator_set": "$ | block_next_validators | ids_to_validator_set"
+      }
+    },
+    {
+      "name": "noerror",
+      "kind": "INLINE",
+      "source": "no error"
+    },
+    {
+      "name": "error",
+      "kind": "INLINE",
+      "source": "error"
+    }
+  ],
+  "output": {
+    "description": "auto-generated from Apalache counterexample",
+    "initial": "$last_blockchain[0] | block_to_initial_block",
+    "input": "$last_blockchain[1:] | map(block_to_light_block)",
+    "expected_output": "$last_state..[?(@.eq == 'state')]..[?(@ == 'finishedSuccess')] | ifelse(noerror, error)"
+  }
+}

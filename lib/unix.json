@@ -4,17 +4,20 @@
     {
       "name": "date",
       "kind": "COMMAND",
-      "source": "date -I"
+      "source": "date -I",
+      "stdin": false
     },
     {
       "name": "utc_timestamp",
       "kind": "COMMAND",
-      "source": "date --utc +%FT%H:%M:%S.%NZ"
+      "source": "date --utc +%FT%H:%M:%S.%NZ",
+      "stdin": false
     },
     {
       "name": "utc_timestamp_hour_ago",
       "kind": "COMMAND",
-      "source": "date --utc +%FT%H:%M:%S.%NZ --date '-1 hour'"
+      "source": "date --utc +%FT%H:%M:%S.%NZ --date '-1 hour'",
+      "stdin": false
     }
   ]
 }

@@ -1,36 +1,91 @@
 {
-  "description": "Transformers for the analysis of Apalache counterexamples",
+  "description": "Transformers for Apalache counterexamples (CEs) with Tendermint blockchains",
+  "use": [
+    "lib/unix.json",
+    "lib/tendermint.json"
+  ],
   "input": [
     {
       "name": "first_state",
+      "description": "extract the first state from Apalache CE",
       "kind": "INLINE",
       "source": "$.declarations[1].body.and | unwrap"
     },
     {
       "name": "last_state",
+      "description": "extract the last state from Apalache CE",
       "kind": "INLINE",
       "source": "$.declarations[-2].body.and | unwrap"
     },
     {
       "name": "last_blockchain",
+      "description": "extract the blockchain from the last state of Apalache CE",
       "kind": "INLINE",
       "source": "$last_state..[?(@.eq == 'blockchain')]..arg.atat..arg.record"
     },
     {
-      "name": "VS",
+      "name": "block_validators",
+      "description": "extract validators from a block of Apalache CE",
       "kind": "INLINE",
       "source": "$..[?(@.key.str == 'VS')].value..str"
     },
     {
-      "name": "NextVS",
+      "name": "block_next_validators",
+      "description": "extract next validators from a block of Apalache CE",
       "kind": "INLINE",
       "source": "$..[?(@.key.str == 'NextVS')].value..str"
     },
-
     {
-      "name": "height",
+      "name": "block_height",
+      "description": "extract height from a block of Apalache CE",
       "kind": "INLINE",
       "source": "$..[?(@.key.str == 'height')].value | unwrap"
+    },
+    {
+      "name": "id_to_validator",
+      "description": "transform an identifier into a validator expected by `tendermint-tendermint validator`",
+      "kind": "INLINE",
+      "source": {
+        "id": "$",
+        "voting_power": 50
+      }
+    },
+    {
+      "name": "block_to_header",
+      "description": "transform a block from Apalache CE into a header expected by `tendermint-tendermint header`",
+      "kind": "INLINE",
+      "source": {
+        "validators": "$ | block_validators | map(id_to_validator)",
+        "next_validators": "$ | block_next_validators | map(id_to_validator)",
+        "height": "$ | block_height",
+        "time": "$utc_timestamp"
+      }
+    },
+    {
+      "name": "block_to_commit",
+      "description": "transform a block from Apalache CE into a commit expected by `tendermint-tendermint commit`",
+      "kind": "INLINE",
+      "source": {
+        "header": "$ | block_to_header"
+      }
+    },
+    {
+      "name": "ids_to_validator_set",
+      "description": "transform an array of identifiers into a a JSON-encoded Tendermint validator set",
+      "kind": "INLINE",
+      "source": {
+        "validators": "$ | map(id_to_validator) | map(tendermint_validator)",
+        "proposer": "$[0] | unwrap | id_to_validator | tendermint_validator"
+      }
+    },
+    {
+      "name": "block_to_signed_header",
+      "description": "transform a block from Apalache CE into a JSON-encoded Tendermint signed header",
+      "kind": "INLINE",
+      "source": {
+        "header": "$ | block_to_header | tendermint_header",
+        "commit": "$ | block_to_commit | tendermint_commit"
+      }
     }
   ]
 }
