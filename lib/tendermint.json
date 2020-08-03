@@ -16,6 +16,11 @@
       "name": "tendermint_commit",
       "kind": "COMMAND",
       "source": "tendermint-testgen --stdin commit"
+    },
+    {
+      "name": "tendermint_vote",
+      "kind": "COMMAND",
+      "source": "tendermint-testgen --stdin vote"
     }
   ]
 }

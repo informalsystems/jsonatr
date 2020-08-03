@@ -9,11 +9,15 @@
       "name": "block_to_initial_block",
       "description": "transforms a block from Apalache CE into a JSON-encoded Tendermint initial light block",
       "kind": "INLINE",
+      "let": {
+        "now": "$utc_timestamp",
+        "utc_timestamp": "$utc_timestamp_2hours_ago"
+      },
       "source": {
         "signed_header": "$ | block_to_signed_header",
         "next_validator_set": "$ | block_next_validators | ids_to_validator_set",
         "trusting_period": "10800000000000",
-        "now": "$utc_timestamp"
+        "now": "$now"
       }
     },
     {
@@ -42,8 +46,8 @@
   ],
   "output": {
     "description": "auto-generated from Apalache counterexample",
-    "initial": "$last_blockchain[0] | block_to_initial_block",
-    "input": "$last_blockchain[1:] | map(block_to_light_block)",
+    "initial": "$last_lightstore[0] | block_to_initial_block",
+    "input": "$last_lightstore[1:] | map(block_to_light_block)",
     "expected_output": "$last_state..[?(@.eq == 'state')]..[?(@ == 'finishedSuccess')] | ifelse(noerror, error)"
   }
 }

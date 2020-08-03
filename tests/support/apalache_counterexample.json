@@ -41,18 +41,21 @@
           },
           {
             "eq": "nextHeight",
-            "arg": 7
+            "arg": 4
           },
           {
             "eq": "now",
-            "arg": 10
+            "arg": 5
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
                 {
-                  "str": "n4"
+                  "str": "n1"
+                },
+                {
+                  "str": "n2"
                 }
               ]
             }
@@ -72,10 +75,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -137,7 +137,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -149,10 +149,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -170,13 +167,13 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -201,16 +198,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -222,7 +210,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -240,10 +228,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -268,7 +253,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -280,16 +265,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -307,7 +283,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -353,7 +329,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -371,213 +347,6 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
                               "str": "n3"
                             }
                           ]
@@ -587,7 +356,7 @@
                         "key": {
                           "str": "time"
                         },
-                        "value": 10
+                        "value": 5
                       }
                     ]
                   }
@@ -637,10 +406,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -735,10 +501,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -819,7 +582,7 @@
                   }
                 },
                 {
-                  "colonGreater": 7,
+                  "colonGreater": 4,
                   "arg": {
                     "str": "StateUnverified"
                   }
@@ -833,18 +596,21 @@
           },
           {
             "eq": "nextHeight",
-            "arg": 4
+            "arg": 2
           },
           {
             "eq": "now",
-            "arg": 10
+            "arg": 5
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
                 {
-                  "str": "n4"
+                  "str": "n1"
+                },
+                {
+                  "str": "n2"
                 }
               ]
             }
@@ -864,10 +630,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -929,7 +692,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -941,10 +704,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -962,13 +722,13 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -993,16 +753,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -1014,7 +765,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1032,10 +783,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1060,7 +808,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1072,16 +820,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -1099,7 +838,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1145,7 +884,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1163,213 +902,6 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
                               "str": "n3"
                             }
                           ]
@@ -1379,7 +911,7 @@
                         "key": {
                           "str": "time"
                         },
-                        "value": 10
+                        "value": 5
                       }
                     ]
                   }
@@ -1429,10 +961,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -1487,7 +1016,7 @@
                   }
                 },
                 {
-                  "colonGreater": 7,
+                  "colonGreater": 4,
                   "arg": {
                     "record": [
                       {
@@ -1497,7 +1026,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
                             }
                           ]
                         }
@@ -1515,10 +1047,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
                                   },
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -1530,7 +1062,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n3"
+                                    "str": "n1"
+                                  },
+                                  {
+                                    "str": "n2"
                                   }
                                 ]
                               }
@@ -1539,7 +1074,7 @@
                               "key": {
                                 "str": "height"
                               },
-                              "value": 7
+                              "value": 4
                             },
                             {
                               "key": {
@@ -1554,9 +1089,6 @@
                                     "str": "n2"
                                   },
                                   {
-                                    "str": "n3"
-                                  },
-                                  {
                                     "str": "n4"
                                   }
                                 ]
@@ -1566,7 +1098,7 @@
                               "key": {
                                 "str": "time"
                               },
-                              "value": 9
+                              "value": 4
                             }
                           ]
                         }
@@ -1615,10 +1147,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1699,13 +1228,13 @@
                   }
                 },
                 {
-                  "colonGreater": 4,
+                  "colonGreater": 2,
                   "arg": {
                     "str": "StateVerified"
                   }
                 },
                 {
-                  "colonGreater": 7,
+                  "colonGreater": 4,
                   "arg": {
                     "str": "StateUnverified"
                   }
@@ -1719,18 +1248,21 @@
           },
           {
             "eq": "nextHeight",
-            "arg": 5
+            "arg": 3
           },
           {
             "eq": "now",
-            "arg": 11
+            "arg": 1403
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
                 {
-                  "str": "n4"
+                  "str": "n1"
+                },
+                {
+                  "str": "n2"
                 }
               ]
             }
@@ -1750,10 +1282,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1815,7 +1344,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1827,10 +1356,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1848,13 +1374,13 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1879,16 +1405,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -1900,7 +1417,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1918,10 +1435,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1946,7 +1460,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -1958,16 +1472,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -1985,7 +1490,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2031,7 +1536,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2049,213 +1554,6 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
                               "str": "n3"
                             }
                           ]
@@ -2265,7 +1563,7 @@
                         "key": {
                           "str": "time"
                         },
-                        "value": 10
+                        "value": 5
                       }
                     ]
                   }
@@ -2315,10 +1613,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -2373,7 +1668,7 @@
                   }
                 },
                 {
-                  "colonGreater": 4,
+                  "colonGreater": 2,
                   "arg": {
                     "record": [
                       {
@@ -2382,15 +1677,6 @@
                         },
                         "value": {
                           "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
                             {
                               "str": "n4"
                             }
@@ -2410,7 +1696,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -2422,8 +1708,23 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
-                                  },
+                                    "str": "n4"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "key": {
+                                "str": "height"
+                              },
+                              "value": 2
+                            },
+                            {
+                              "key": {
+                                "str": "lastCommit"
+                              },
+                              "value": {
+                                "enumSet": [
                                   {
                                     "str": "n2"
                                   },
@@ -2438,27 +1739,9 @@
                             },
                             {
                               "key": {
-                                "str": "height"
-                              },
-                              "value": 4
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
                                 "str": "time"
                               },
-                              "value": 4
+                              "value": 2
                             }
                           ]
                         }
@@ -2467,7 +1750,7 @@
                   }
                 },
                 {
-                  "colonGreater": 7,
+                  "colonGreater": 4,
                   "arg": {
                     "record": [
                       {
@@ -2477,7 +1760,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
                             }
                           ]
                         }
@@ -2495,10 +1781,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
                                   },
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -2510,7 +1796,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n3"
+                                    "str": "n1"
+                                  },
+                                  {
+                                    "str": "n2"
                                   }
                                 ]
                               }
@@ -2519,7 +1808,7 @@
                               "key": {
                                 "str": "height"
                               },
-                              "value": 7
+                              "value": 4
                             },
                             {
                               "key": {
@@ -2534,9 +1823,6 @@
                                     "str": "n2"
                                   },
                                   {
-                                    "str": "n3"
-                                  },
-                                  {
                                     "str": "n4"
                                   }
                                 ]
@@ -2546,7 +1832,7 @@
                               "key": {
                                 "str": "time"
                               },
-                              "value": 9
+                              "value": 4
                             }
                           ]
                         }
@@ -2568,15 +1854,6 @@
                   "value": {
                     "enumSet": [
                       {
-                        "str": "n1"
-                      },
-                      {
-                        "str": "n2"
-                      },
-                      {
-                        "str": "n3"
-                      },
-                      {
                         "str": "n4"
                       }
                     ]
@@ -2595,7 +1872,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2607,8 +1884,23 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 2
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
                             {
                               "str": "n2"
                             },
@@ -2623,27 +1915,9 @@
                       },
                       {
                         "key": {
-                          "str": "height"
-                        },
-                        "value": 4
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
                           "str": "time"
                         },
-                        "value": 4
+                        "value": 2
                       }
                     ]
                   }
@@ -2664,7 +1938,7 @@
           {
             "eq": "state",
             "arg": {
-              "str": "working"
+              "str": "finishedFailure"
             }
           },
           {
@@ -2678,19 +1952,19 @@
                   }
                 },
                 {
+                  "colonGreater": 2,
+                  "arg": {
+                    "str": "StateVerified"
+                  }
+                },
+                {
+                  "colonGreater": 3,
+                  "arg": {
+                    "str": "StateFailed"
+                  }
+                },
+                {
                   "colonGreater": 4,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 7,
                   "arg": {
                     "str": "StateUnverified"
                   }
@@ -2704,18 +1978,21 @@
           },
           {
             "eq": "nextHeight",
-            "arg": 6
+            "arg": 3
           },
           {
             "eq": "now",
-            "arg": 12
+            "arg": 1403
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
                 {
-                  "str": "n4"
+                  "str": "n1"
+                },
+                {
+                  "str": "n2"
                 }
               ]
             }
@@ -2735,10 +2012,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2800,7 +2074,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2812,10 +2086,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2833,13 +2104,13 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2864,16 +2135,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -2885,7 +2147,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2903,10 +2165,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2931,7 +2190,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2943,16 +2202,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -2970,7 +2220,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -3016,7 +2266,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n4"
                             }
                           ]
                         }
@@ -3034,213 +2284,6 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
                               "str": "n3"
                             }
                           ]
@@ -3250,7 +2293,7 @@
                         "key": {
                           "str": "time"
                         },
-                        "value": 10
+                        "value": 5
                       }
                     ]
                   }
@@ -3300,10 +2343,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -3353,523 +2393,6 @@
                             }
                           ]
                         }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 4
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 4
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 5
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 6
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 7
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 9
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "latestVerified",
-            "arg": {
-              "record": [
-                {
-                  "key": {
-                    "str": "Commits"
-                  },
-                  "value": {
-                    "enumSet": [
-                      {
-                        "str": "n1"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "key": {
-                    "str": "header"
-                  },
-                  "value": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 5
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "params": [
-        
-      ]
-    },
-    {
-      "operator": "State6",
-      "body": {
-        "and": [
-          {
-            "eq": "state",
-            "arg": {
-              "str": "working"
-            }
-          },
-          {
-            "eq": "lightBlockStatus",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "str": "StateUnverified"
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "nprobes",
-            "arg": 4
-          },
-          {
-            "eq": "nextHeight",
-            "arg": 7
-          },
-          {
-            "eq": "now",
-            "arg": 1407
-          },
-          {
-            "eq": "Faulty",
-            "arg": {
-              "enumSet": [
-                {
-                  "str": "n4"
-                }
-              ]
-            }
-          },
-          {
-            "eq": "blockchain",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 1
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 1
                       }
                     ]
                   }
@@ -3880,60 +2403,78 @@
                     "record": [
                       {
                         "key": {
-                          "str": "NextVS"
+                          "str": "Commits"
                         },
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
+                              "str": "n4"
                             }
                           ]
                         }
                       },
                       {
                         "key": {
-                          "str": "VS"
+                          "str": "header"
                         },
                         "value": {
-                          "enumSet": [
+                          "record": [
                             {
-                              "str": "n1"
+                              "key": {
+                                "str": "NextVS"
+                              },
+                              "value": {
+                                "enumSet": [
+                                  {
+                                    "str": "n4"
+                                  }
+                                ]
+                              }
                             },
                             {
-                              "str": "n2"
+                              "key": {
+                                "str": "VS"
+                              },
+                              "value": {
+                                "enumSet": [
+                                  {
+                                    "str": "n4"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "key": {
+                                "str": "height"
+                              },
+                              "value": 2
+                            },
+                            {
+                              "key": {
+                                "str": "lastCommit"
+                              },
+                              "value": {
+                                "enumSet": [
+                                  {
+                                    "str": "n2"
+                                  },
+                                  {
+                                    "str": "n3"
+                                  },
+                                  {
+                                    "str": "n4"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "key": {
+                                "str": "time"
+                              },
+                              "value": 2
                             }
                           ]
                         }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 2
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 2
                       }
                     ]
                   }
@@ -3944,430 +2485,12 @@
                     "record": [
                       {
                         "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 3
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 3
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 4
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 4
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 5
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 10
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "fetchedLightBlocks",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
                           "str": "Commits"
                         },
                         "value": {
                           "enumSet": [
                             {
                               "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -4386,9 +2509,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
                                   }
                                 ]
                               }
@@ -4403,9 +2523,6 @@
                                     "str": "n1"
                                   },
                                   {
-                                    "str": "n2"
-                                  },
-                                  {
                                     "str": "n3"
                                   },
                                   {
@@ -4418,7 +2535,7 @@
                               "key": {
                                 "str": "height"
                               },
-                              "value": 1
+                              "value": 3
                             },
                             {
                               "key": {
@@ -4426,7 +2543,15 @@
                               },
                               "value": {
                                 "enumSet": [
-                                  
+                                  {
+                                    "str": "n1"
+                                  },
+                                  {
+                                    "str": "n3"
+                                  },
+                                  {
+                                    "str": "n4"
+                                  }
                                 ]
                               }
                             },
@@ -4457,12 +2582,6 @@
                             },
                             {
                               "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -4480,7 +2599,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
+                                  },
+                                  {
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -4496,12 +2618,6 @@
                                   },
                                   {
                                     "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -4519,7 +2635,13 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n3"
+                                    "str": "n1"
+                                  },
+                                  {
+                                    "str": "n2"
+                                  },
+                                  {
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -4529,282 +2651,6 @@
                                 "str": "time"
                               },
                               "value": 4
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 5
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 6
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 6
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 7
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 7
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 9
                             }
                           ]
                         }
@@ -4825,15 +2671,6 @@
                   },
                   "value": {
                     "enumSet": [
-                      {
-                        "str": "n1"
-                      },
-                      {
-                        "str": "n2"
-                      },
-                      {
-                        "str": "n3"
-                      },
                       {
                         "str": "n4"
                       }
@@ -4853,27 +2690,6 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
                               "str": "n4"
                             }
                           ]
@@ -4881,205 +2697,12 @@
                       },
                       {
                         "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "params": [
-        
-      ]
-    },
-    {
-      "operator": "State7",
-      "body": {
-        "and": [
-          {
-            "eq": "state",
-            "arg": {
-              "str": "finishedSuccess"
-            }
-          },
-          {
-            "eq": "lightBlockStatus",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "str": "StateVerified"
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "nprobes",
-            "arg": 5
-          },
-          {
-            "eq": "nextHeight",
-            "arg": 7
-          },
-          {
-            "eq": "now",
-            "arg": 1407
-          },
-          {
-            "eq": "Faulty",
-            "arg": {
-              "enumSet": [
-                {
-                  "str": "n4"
-                }
-              ]
-            }
-          },
-          {
-            "eq": "blockchain",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
                           "str": "VS"
                         },
                         "value": {
                           "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
                             {
                               "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 1
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 2,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
                             }
                           ]
                         }
@@ -5097,13 +2720,13 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
-                            },
-                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -5113,968 +2736,6 @@
                           "str": "time"
                         },
                         "value": 2
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 3,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 3
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 3
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 4
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 4
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 5
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 6
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 6
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 7
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 8,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 8
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 10
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "fetchedLightBlocks",
-            "arg": {
-              "atat": [
-                {
-                  "colonGreater": 1,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 1
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 1
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 4,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 4
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 4
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 5,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 5
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 6
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 6,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 6
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 7
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "colonGreater": 7,
-                  "arg": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "Commits"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "header"
-                        },
-                        "value": {
-                          "record": [
-                            {
-                              "key": {
-                                "str": "NextVS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "VS"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n3"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "height"
-                              },
-                              "value": 7
-                            },
-                            {
-                              "key": {
-                                "str": "lastCommit"
-                              },
-                              "value": {
-                                "enumSet": [
-                                  {
-                                    "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "key": {
-                                "str": "time"
-                              },
-                              "value": 9
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "eq": "latestVerified",
-            "arg": {
-              "record": [
-                {
-                  "key": {
-                    "str": "Commits"
-                  },
-                  "value": {
-                    "enumSet": [
-                      {
-                        "str": "n3"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "key": {
-                    "str": "header"
-                  },
-                  "value": {
-                    "record": [
-                      {
-                        "key": {
-                          "str": "NextVS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "VS"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n3"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 7
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
-                            {
-                              "str": "n1"
-                            },
-                            {
-                              "str": "n2"
-                            },
-                            {
-                              "str": "n3"
-                            },
-                            {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "time"
-                        },
-                        "value": 9
                       }
                     ]
                   }
@@ -6093,14 +2754,14 @@
       "body": {
         "and": [
           {
-            "eq": true,
-            "arg": 5
-          },
-          {
             "eq": "state",
             "arg": {
-              "str": "finishedSuccess"
+              "str": "finishedFailure"
             }
+          },
+          {
+            "eq": true,
+            "arg": 4
           }
         ]
       },

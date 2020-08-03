@@ -1,45 +1,22 @@
 {
-  "description": "Transformers for Apalache counterexamples (CEs) with Tendermint blockchains",
+  "description": "Transformers for Apalache counterexamples (CEs) from Tendermint LightClient model",
   "use": [
     "lib/unix.json",
-    "lib/tendermint.json"
+    "lib/tendermint.json",
+    "lib/apalache-tendermint.json"
   ],
   "input": [
     {
-      "name": "first_state",
-      "description": "extract the first state from Apalache CE",
-      "kind": "INLINE",
-      "source": "$.declarations[1].body.and | unwrap"
-    },
-    {
-      "name": "last_state",
-      "description": "extract the last state from Apalache CE",
-      "kind": "INLINE",
-      "source": "$.declarations[-2].body.and | unwrap"
-    },
-    {
-      "name": "last_blockchain",
-      "description": "extract the blockchain from the last state of Apalache CE",
-      "kind": "INLINE",
-      "source": "$last_state..[?(@.eq == 'blockchain')]..arg.atat..arg.record"
-    },
-    {
       "name": "last_lightstore",
-      "description": "extract the store of the LightClient blocks from the last state of Apalache CE",
+      "description": "extract the lightstore from the last state of Apalache CE",
       "kind": "INLINE",
       "source": "$last_state..[?(@.eq == 'fetchedLightBlocks')]..arg.atat..arg.record"
     },
     {
       "name": "lightblock_commits",
-      "description": "extract commits from a LightClient block of Apalache CE",
-      "kind": "INLINE",
-      "source": "$..[?(@.key.str == 'Commits')].value..str"
-    },
-    {
-      "name": "block_validators",
       "description": "extract validators from a block of Apalache CE",
       "kind": "INLINE",
-      "source": "$..[?(@.key.str == 'VS')].value..str"
+      "source": "$..[?(@.key.str == 'Commits')].value..str"
     },
     {
       "name": "block_next_validators",
@@ -55,7 +32,7 @@
     },
     {
       "name": "id_to_validator",
-      "description": "transform an identifier into a validator expected by `tendermint-testgen validator`",
+      "description": "transform an identifier into a validator expected by `tendermint-tendermint validator`",
       "kind": "INLINE",
       "source": {
         "id": "$",
@@ -63,17 +40,8 @@
       }
     },
     {
-      "name": "id_to_vote",
-      "description": "transform an identifier into a vote expected by `tendermint-testgen vote`",
-      "kind": "INLINE",
-      "source": {
-        "validator": "$ | id_to_validator",
-        "header": "$header"
-      }
-    },
-    {
       "name": "block_to_header",
-      "description": "transform a block from Apalache CE into a header expected by `tendermint-testgen header`",
+      "description": "transform a block from Apalache CE into a header expected by `tendermint-tendermint header`",
       "kind": "INLINE",
       "source": {
         "validators": "$ | block_validators | map(id_to_validator)",
@@ -84,14 +52,11 @@
     },
     {
       "name": "block_to_commit",
-      "description": "transform a block from Apalache CE into a commit expected by `tendermint-testgen commit`",
+      "description": "transform a block from Apalache CE into a commit expected by `tendermint-tendermint commit`",
       "kind": "INLINE",
-      "let": {
-        "header": "$ | block_to_header"
-      },
       "source": {
-        "header": "$header",
-        "votes": "$ | lightblock_commits | map(id_to_vote)"
+        "header": "$ | block_to_header",
+        "votes": "$ | lightblock_commits"
       }
     },
     {

@@ -18,6 +18,12 @@
       "kind": "COMMAND",
       "source": "date --utc +%FT%H:%M:%S.%NZ --date '-1 hour'",
       "stdin": false
+    },
+    {
+      "name": "utc_timestamp_2hours_ago",
+      "kind": "COMMAND",
+      "source": "date --utc +%FT%H:%M:%S.%NZ --date '-2 hour'",
+      "stdin": false
     }
   ]
 }
