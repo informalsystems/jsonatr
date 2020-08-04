@@ -15,19 +15,13 @@
       "name": "last_state",
       "description": "extract the last state from Apalache CE",
       "kind": "INLINE",
-      "source": "$.declarations[-2].body.and | unwrap"
+      "source": "$.declarations[-1].body.and | unwrap"
     },
     {
-      "name": "last_blockchain",
-      "description": "extract the blockchain from the last state of Apalache CE",
+      "name": "states",
+      "description": "extract all state from Apalache CE",
       "kind": "INLINE",
-      "source": "$last_state..[?(@.eq == 'blockchain')]..arg.atat..arg.record"
-    },
-    {
-      "name": "last_lightstore",
-      "description": "extract the store of the LightClient blocks from the last state of Apalache CE",
-      "kind": "INLINE",
-      "source": "$last_state..[?(@.eq == 'fetchedLightBlocks')]..arg.atat..arg.record"
+      "source": "$.declarations[1:-1].body.and"
     },
     {
       "name": "lightblock_commits",

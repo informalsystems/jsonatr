@@ -21,33 +21,26 @@
       }
     },
     {
-      "name": "block_to_light_block",
+      "name": "state_to_lite_block_verdict",
       "description": "transforms a block from Apalache CE into a JSON-encoded Tendermint light block",
       "kind": "INLINE",
       "let": {
-        "utc_timestamp": "$utc_timestamp_hour_ago"
+        "utc_timestamp": "$utc_timestamp_hour_ago",
+        "block": "$..[?(@.eq == 'prevChecked')]"
       },
       "source": {
-        "signed_header": "$ | block_to_signed_header",
-        "validator_set": "$ | block_validators | ids_to_validator_set",
-        "next_validator_set": "$ | block_next_validators | ids_to_validator_set"
+        "block": {
+          "signed_header": "$block | block_to_signed_header",
+          "validator_set": "$block | block_validators | ids_to_validator_set",
+          "next_validator_set": "$block | block_next_validators | ids_to_validator_set"
+        },
+        "verdict": "$..[?(@.eq == 'prevVerdict')].arg.str | unwrap"
       }
-    },
-    {
-      "name": "noerror",
-      "kind": "INLINE",
-      "source": "no error"
-    },
-    {
-      "name": "error",
-      "kind": "INLINE",
-      "source": "error"
     }
   ],
   "output": {
     "description": "auto-generated from Apalache counterexample",
-    "initial": "$last_lightstore[0] | block_to_initial_block",
-    "input": "$last_lightstore[1:] | map(block_to_light_block)",
-    "expected_output": "$last_state..[?(@.eq == 'state')]..[?(@ == 'finishedSuccess')] | ifelse(noerror, error)"
+    "initial": "$states[0]..[?(@.eq == 'prevVerified')] | block_to_initial_block",
+    "input": "$states[1:] | map(state_to_lite_block_verdict)"
   }
 }

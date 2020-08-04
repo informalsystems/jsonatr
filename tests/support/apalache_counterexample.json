@@ -44,19 +44,106 @@
             "arg": 4
           },
           {
+            "eq": "prevChecked",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      },
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n3"
+                      },
+                      {
+                        "str": "n4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 1
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
             "eq": "now",
-            "arg": 5
+            "arg": 1400
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
-                {
-                  "str": "n1"
-                },
-                {
-                  "str": "n2"
-                }
+                
               ]
             }
           },
@@ -75,7 +162,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -137,6 +224,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -149,7 +239,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -167,13 +257,13 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -198,6 +288,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n2"
+                            },
+                            {
                               "str": "n3"
                             }
                           ]
@@ -209,6 +302,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -228,7 +324,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -253,6 +349,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -264,6 +363,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -282,6 +384,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -329,6 +434,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -346,6 +454,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -406,7 +517,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -501,7 +612,105 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 1
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "eq": "prevVerdict",
+            "arg": {
+              "str": "OK"
+            }
+          },
+          {
+            "eq": "prevVerified",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      },
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n3"
+                      },
+                      {
+                        "str": "n4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
                             }
                           ]
                         }
@@ -599,19 +808,102 @@
             "arg": 2
           },
           {
+            "eq": "prevChecked",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n3"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n3"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 4
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 4
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
             "eq": "now",
-            "arg": 5
+            "arg": 1400
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
-                {
-                  "str": "n1"
-                },
-                {
-                  "str": "n2"
-                }
+                
               ]
             }
           },
@@ -630,7 +922,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -692,6 +984,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -704,7 +999,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -722,13 +1017,13 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -753,6 +1048,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n2"
+                            },
+                            {
                               "str": "n3"
                             }
                           ]
@@ -764,6 +1062,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -783,7 +1084,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -808,6 +1109,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -819,6 +1123,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -837,6 +1144,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -884,6 +1194,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -901,6 +1214,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -961,7 +1277,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -1026,10 +1342,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n2"
                             },
                             {
-                              "str": "n2"
+                              "str": "n3"
                             }
                           ]
                         }
@@ -1047,10 +1363,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   },
                                   {
-                                    "str": "n3"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -1062,10 +1378,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
                                   },
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -1084,9 +1400,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
                                   },
                                   {
                                     "str": "n4"
@@ -1147,7 +1460,105 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 1
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "eq": "prevVerdict",
+            "arg": {
+              "str": "CANNOT_VERIFY"
+            }
+          },
+          {
+            "eq": "prevVerified",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      },
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n3"
+                      },
+                      {
+                        "str": "n4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1251,19 +1662,99 @@
             "arg": 3
           },
           {
+            "eq": "prevChecked",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 2
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 2
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
             "eq": "now",
-            "arg": 1403
+            "arg": 1404
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
-                {
-                  "str": "n1"
-                },
-                {
-                  "str": "n2"
-                }
+                
               ]
             }
           },
@@ -1282,7 +1773,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1344,6 +1835,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -1356,7 +1850,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1374,13 +1868,13 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -1405,6 +1899,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n2"
+                            },
+                            {
                               "str": "n3"
                             }
                           ]
@@ -1416,6 +1913,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -1435,7 +1935,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1460,6 +1960,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -1471,6 +1974,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -1489,6 +1995,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -1536,6 +2045,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -1553,6 +2065,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -1613,7 +2128,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -1678,7 +2193,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1696,6 +2211,9 @@
                               "value": {
                                 "enumSet": [
                                   {
+                                    "str": "n1"
+                                  },
+                                  {
                                     "str": "n4"
                                   }
                                 ]
@@ -1708,7 +2226,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -1726,13 +2244,13 @@
                               "value": {
                                 "enumSet": [
                                   {
+                                    "str": "n1"
+                                  },
+                                  {
                                     "str": "n2"
                                   },
                                   {
                                     "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -1760,10 +2278,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n2"
                             },
                             {
-                              "str": "n2"
+                              "str": "n3"
                             }
                           ]
                         }
@@ -1781,10 +2299,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   },
                                   {
-                                    "str": "n3"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -1796,10 +2314,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
                                   },
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -1818,9 +2336,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
                                   },
                                   {
                                     "str": "n4"
@@ -1854,6 +2369,106 @@
                   "value": {
                     "enumSet": [
                       {
+                        "str": "n1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 2
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 2
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "eq": "prevVerdict",
+            "arg": {
+              "str": "OK"
+            }
+          },
+          {
+            "eq": "prevVerified",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      },
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n3"
+                      },
+                      {
                         "str": "n4"
                       }
                     ]
@@ -1872,7 +2487,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -1884,23 +2499,8 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "key": {
-                          "str": "height"
-                        },
-                        "value": 2
-                      },
-                      {
-                        "key": {
-                          "str": "lastCommit"
-                        },
-                        "value": {
-                          "enumSet": [
+                              "str": "n1"
+                            },
                             {
                               "str": "n2"
                             },
@@ -1915,9 +2515,25 @@
                       },
                       {
                         "key": {
+                          "str": "height"
+                        },
+                        "value": 1
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
                           "str": "time"
                         },
-                        "value": 2
+                        "value": 1
                       }
                     ]
                   }
@@ -1981,19 +2597,99 @@
             "arg": 3
           },
           {
+            "eq": "prevChecked",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n2"
+                      },
+                      {
+                        "str": "n4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 3
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 3
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
             "eq": "now",
-            "arg": 1403
+            "arg": 1404
           },
           {
             "eq": "Faulty",
             "arg": {
               "enumSet": [
-                {
-                  "str": "n1"
-                },
-                {
-                  "str": "n2"
-                }
+                
               ]
             }
           },
@@ -2012,7 +2708,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -2074,6 +2770,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -2086,7 +2785,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -2104,13 +2803,13 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
-                            },
-                            {
-                              "str": "n4"
                             }
                           ]
                         }
@@ -2135,6 +2834,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n2"
+                            },
+                            {
                               "str": "n3"
                             }
                           ]
@@ -2146,6 +2848,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -2165,7 +2870,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -2190,6 +2895,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -2201,6 +2909,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -2219,6 +2930,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n1"
+                            },
                             {
                               "str": "n4"
                             }
@@ -2266,6 +2980,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n3"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -2283,6 +3000,9 @@
                         },
                         "value": {
                           "enumSet": [
+                            {
+                              "str": "n2"
+                            },
                             {
                               "str": "n3"
                             }
@@ -2343,7 +3063,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -2408,7 +3128,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -2426,6 +3146,9 @@
                               "value": {
                                 "enumSet": [
                                   {
+                                    "str": "n1"
+                                  },
+                                  {
                                     "str": "n4"
                                   }
                                 ]
@@ -2438,7 +3161,7 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n4"
+                                    "str": "n1"
                                   }
                                 ]
                               }
@@ -2456,13 +3179,13 @@
                               "value": {
                                 "enumSet": [
                                   {
+                                    "str": "n1"
+                                  },
+                                  {
                                     "str": "n2"
                                   },
                                   {
                                     "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -2490,7 +3213,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n4"
                             }
                           ]
                         }
@@ -2508,7 +3234,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
+                                  },
+                                  {
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -2521,9 +3250,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n3"
                                   },
                                   {
                                     "str": "n4"
@@ -2545,12 +3271,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n3"
-                                  },
-                                  {
-                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -2559,7 +3279,7 @@
                               "key": {
                                 "str": "time"
                               },
-                              "value": 1
+                              "value": 3
                             }
                           ]
                         }
@@ -2578,10 +3298,10 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n1"
+                              "str": "n2"
                             },
                             {
-                              "str": "n2"
+                              "str": "n3"
                             }
                           ]
                         }
@@ -2599,10 +3319,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   },
                                   {
-                                    "str": "n3"
+                                    "str": "n4"
                                   }
                                 ]
                               }
@@ -2614,10 +3334,10 @@
                               "value": {
                                 "enumSet": [
                                   {
-                                    "str": "n1"
+                                    "str": "n2"
                                   },
                                   {
-                                    "str": "n2"
+                                    "str": "n3"
                                   }
                                 ]
                               }
@@ -2636,9 +3356,6 @@
                                 "enumSet": [
                                   {
                                     "str": "n1"
-                                  },
-                                  {
-                                    "str": "n2"
                                   },
                                   {
                                     "str": "n4"
@@ -2672,7 +3389,7 @@
                   "value": {
                     "enumSet": [
                       {
-                        "str": "n4"
+                        "str": "n1"
                       }
                     ]
                   }
@@ -2690,6 +3407,9 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n4"
                             }
                           ]
@@ -2702,7 +3422,7 @@
                         "value": {
                           "enumSet": [
                             {
-                              "str": "n4"
+                              "str": "n1"
                             }
                           ]
                         }
@@ -2720,13 +3440,104 @@
                         "value": {
                           "enumSet": [
                             {
+                              "str": "n1"
+                            },
+                            {
                               "str": "n2"
                             },
                             {
                               "str": "n3"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "time"
+                        },
+                        "value": 2
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "eq": "prevVerdict",
+            "arg": {
+              "str": "FAILED_VERIFICATION"
+            }
+          },
+          {
+            "eq": "prevVerified",
+            "arg": {
+              "record": [
+                {
+                  "key": {
+                    "str": "Commits"
+                  },
+                  "value": {
+                    "enumSet": [
+                      {
+                        "str": "n1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "str": "header"
+                  },
+                  "value": {
+                    "record": [
+                      {
+                        "key": {
+                          "str": "NextVS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
                             },
                             {
                               "str": "n4"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "VS"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": {
+                          "str": "height"
+                        },
+                        "value": 2
+                      },
+                      {
+                        "key": {
+                          "str": "lastCommit"
+                        },
+                        "value": {
+                          "enumSet": [
+                            {
+                              "str": "n1"
+                            },
+                            {
+                              "str": "n2"
+                            },
+                            {
+                              "str": "n3"
                             }
                           ]
                         }
