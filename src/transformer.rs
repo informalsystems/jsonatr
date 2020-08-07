@@ -5,6 +5,7 @@ use std::process::{Command, Stdio};
 use regex::Regex;
 use simple_error::*;
 use std::io::{Write, Read};
+use std::path::{PathBuf};
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 enum InputKind {
@@ -61,25 +62,30 @@ pub struct Transformer {
     locals: Locals,
 
     #[serde(skip)]
-    builtins: Builtins
+    builtins: Builtins,
+
+    #[serde(skip)]
+    path: String
 }
 
 impl Transformer {
-    pub fn empty() -> Transformer {
+    pub fn empty(path: &str) -> Transformer {
         let mut spec = Transformer {
             uses: None,
             input: None,
             output: None,
             inputs: Default::default(),
             locals: vec![],
-            builtins: Default::default()
+            builtins: Default::default(),
+            path: path.to_owned()
         };
         spec.add_builtins();
         spec
     }
 
-    pub fn new(spec: &str) -> Result<Transformer, SimpleError> {
+    pub fn new(spec: &str, path: &str) -> Result<Transformer, SimpleError> {
         let mut spec: Transformer = try_with!(serde_json::from_str(spec),"failed to parse JSON");
+        spec.path = path.to_owned();
         spec.add_builtins();
         if let Some(uses) = spec.uses.clone() {
             for path in uses {
@@ -105,8 +111,15 @@ impl Transformer {
     }
 
     pub fn add_use(&mut self, path: String) -> Result<(), SimpleError> {
-        let file = read_file(&path)?;
-        let other = Transformer::new(&file)?;
+        // TODO: The below code is ugly, amd includes unwraps; find the better way
+        let mut file_path = PathBuf::from(&self.path);
+        if file_path.is_file() {
+            file_path = file_path.parent().unwrap().to_path_buf();
+        }
+        file_path.push(path);
+        let file_path_str = file_path.to_str().unwrap();
+        let file = read_file(file_path_str)?;
+        let other = Transformer::new(&file, file_path_str)?;
         self.merge(&other)?;
         Ok(())
     }

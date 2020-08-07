@@ -1,7 +1,7 @@
 {
   "description": "Simple output with using a transformer from another file",
   "use": [
-    "tests/support/commands.json"
+    "../../lib/unix.json"
   ],
   "output": {
     "tool": "jsonatr",

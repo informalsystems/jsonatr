@@ -30,9 +30,10 @@ fn run() -> Result<(), SimpleError> {
         bail!("both --stdin and --input are given, but only one main input can be accepted")
     }
 
-    let mut spec = Transformer::empty();
-    for path in opts.include {
-        spec.add_use(path)?
+    let current_dir = std::env::current_dir().unwrap().to_str().unwrap().to_owned();
+    let mut spec = Transformer::empty(&current_dir);
+    for path in &opts.include {
+        spec.add_use(path.to_string())?;
     }
 
     if let Some(output_spec) = opts.output_spec {

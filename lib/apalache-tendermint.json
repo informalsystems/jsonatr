@@ -1,8 +1,8 @@
 {
   "description": "Transformers for Apalache counterexamples (CEs) with Tendermint blockchains",
   "use": [
-    "lib/unix.json",
-    "lib/tendermint.json"
+    "unix.json",
+    "tendermint.json"
   ],
   "input": [
     {

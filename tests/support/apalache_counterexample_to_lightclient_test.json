@@ -1,8 +1,8 @@
 {
   "description": "Transform an Apalache counterexample into a Tendermint LightClient test",
   "use": [
-    "lib/unix.json",
-    "lib/apalache-tendermint.json"
+    "../../lib/unix.json",
+    "../../lib/apalache-tendermint.json"
   ],
   "input": [
     {
