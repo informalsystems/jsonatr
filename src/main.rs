@@ -66,6 +66,9 @@ fn run() -> Result<(), SimpleError> {
 fn main() {
     match run() {
         Ok(_) => (),
-        Err(e) => println!("Error: {}", e)
+        Err(e) => {
+            println!("Error: {}", e);
+            std::process::exit(1);
+        }
     }
 }
