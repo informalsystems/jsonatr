@@ -4,7 +4,7 @@ use std::process::Command;
 
 fn test_expect(file: &str, expect: &str) {
     let input = std::fs::read_to_string(file).unwrap();
-    let mut spec = Transformer::new(&input).unwrap();
+    let mut spec = Transformer::new(&input, file).unwrap();
     let res = spec.transform(&Value::Null).unwrap();
     assert_eq!(res, expect)
 }
