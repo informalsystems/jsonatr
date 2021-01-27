@@ -48,7 +48,7 @@ lazy_static! {
 }
 
 type Locals = Vec<std::collections::HashMap<String, Value>>;
-type Builtin = fn(&mut Transformer, Value, &Vec<String>) -> Option<Value>;
+type Builtin = fn(&mut Transformer, Value, &[String]) -> Option<Value>;
 type Builtins = std::collections::HashMap<String, Builtin>;
 
 #[derive(Deserialize)]
@@ -170,7 +170,7 @@ impl Transformer {
     }
 
     // assumes that the value is a singleton array; transforms array into its single element
-    fn builtin_unwrap(&mut self, v: Value, _args: &Vec<String>) -> Option<Value> {
+    fn builtin_unwrap(&mut self, v: Value, _args: &[String]) -> Option<Value> {
         let arr = v.as_array()?;
         match arr.len() {
             1 => Some(arr[0].clone()),
@@ -179,7 +179,7 @@ impl Transformer {
     }
 
     // assumes that the value is an array, and there is a single argument, which is an input name
-    fn builtin_map(&mut self, v: Value, args: &Vec<String>) -> Option<Value> {
+    fn builtin_map(&mut self, v: Value, args: &[String]) -> Option<Value> {
         let arr = v.as_array()?;
         match args.len() {
             1 => {
@@ -205,7 +205,7 @@ impl Transformer {
 
     // checks the value for non-emptiness/non-zeroness,
     // and assumes that there are two arguments: if_branch and else_branch transformers
-    fn builtin_ifelse(&mut self, v: Value, args: &Vec<String>) -> Option<Value> {
+    fn builtin_ifelse(&mut self, v: Value, args: &[String]) -> Option<Value> {
         if args.len() != 2 {
             return None;
         }
@@ -295,7 +295,7 @@ impl Transformer {
                 if let Some(command) = input.source.as_str() {
                     match shell_words::split(command) {
                         Ok(args) => {
-                            if args.len() < 1 {
+                            if args.is_empty() {
                                 bail!("failed to parse command for input '{}'", input.name);
                             }
 
@@ -335,12 +335,11 @@ impl Transformer {
                                 )
                             }
                             let mut output = String::new();
-                            match process.stdout.unwrap().read_to_string(&mut output) {
-                                Err(_) => bail!(
+                            if process.stdout.unwrap().read_to_string(&mut output).is_err() {
+                                bail!(
                                     "couldn't read from command stdout for input '{}",
                                     input.name
-                                ),
-                                Ok(_) => (),
+                                )
                             }
                             match serde_json::from_str(&output) {
                                 Err(_) => result = Value::String(output.trim_end().to_string()),
@@ -359,7 +358,7 @@ impl Transformer {
 
     fn apply_input_by_name(
         &mut self,
-        name: &String,
+        name: &str,
         root: &Value,
     ) -> Result<Value, Box<dyn std::error::Error>> {
         // first try to find the reference in some local scope
@@ -404,7 +403,7 @@ impl Transformer {
         Ok(result)
     }
 
-    fn transform_string(&mut self, text: &String, root: &Value) -> Option<Value> {
+    fn transform_string(&mut self, text: &str, root: &Value) -> Option<Value> {
         let expr = self.parse_expr(text)?;
         let json = match expr.input.as_str() {
             "" => match root {
@@ -424,7 +423,7 @@ impl Transformer {
         }?;
         let mut value: Value;
         if expr.jpath.is_empty() {
-            value = json.clone()
+            value = json;
         } else {
             value = match jsonpath::select(&json, ("$".to_string() + &expr.jpath).as_str()) {
                 Ok(values) => Some(Value::Array(values.into_iter().cloned().collect())),
