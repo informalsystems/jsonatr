@@ -1,6 +1,6 @@
 use serde_json::Value;
-use std::io::{self, Read};
 use simple_error::*;
+use std::io::{self, Read};
 
 pub fn read_file(path: &str) -> Result<String, SimpleError> {
     let file = try_with!(std::fs::read_to_string(path), "failed to read file");
@@ -20,7 +20,10 @@ pub fn parse_file(path: &str) -> Result<Value, SimpleError> {
 
 pub fn parse_stdin() -> Result<Value, SimpleError> {
     let mut buffer = String::new();
-    try_with!(io::stdin().read_to_string(&mut buffer), "failed to read from STDIN");
+    try_with!(
+        io::stdin().read_to_string(&mut buffer),
+        "failed to read from STDIN"
+    );
     let value = parse_string(&buffer)?;
     Ok(value)
 }
